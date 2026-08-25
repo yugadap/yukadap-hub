@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>프로젝트 · 육아답</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700&display=swap');
+
+:root{
+  --paper:#FFFCF3;
+  --dotgrid:#EAE2CC;
+  --ink:#221D17;
+  --ink-soft:#5A5347;
+  --pink:#FFC9D6;
+  --pink-d:#F79CB4;
+  --blue:#BFE3FF;
+  --blue-d:#8FCBFF;
+  --mint:#C9F2D8;
+  --mint-d:#8FE0B4;
+  --yellow:#FFE79A;
+  --yellow-d:#FFD65C;
+  --lav:#E4D8FF;
+  --lav-d:#C9B6FF;
+  --card:#FFFFFF;
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{
+  background-color:var(--paper);
+  background-image:radial-gradient(circle, var(--dotgrid) 1.3px, transparent 1.3px);
+  background-size:24px 24px;
+  color:var(--ink);
+  font-family:'Nanum Gothic', 'Malgun Gothic', sans-serif;
+  min-height:100vh;
+  -webkit-font-smoothing:antialiased;
+}
+.app{max-width:720px;margin:0 auto;padding:30px 18px 70px;min-height:100vh;}
+
+h1,h2,.font-display{font-family:'Nanum Gothic', 'Malgun Gothic', sans-serif; font-weight:700;}
+
+/* ---- brand ---- */
+.brand{display:flex;align-items:center;gap:10px;margin-bottom:30px;}
+.brand a{display:flex;align-items:center;gap:10px;text-decoration:none;color:inherit;}
+.brand svg{width:34px;height:34px;flex:none;}
+.brand-name{font-family:'Nanum Gothic', 'Malgun Gothic', sans-serif;font-size:18px;font-weight:700;}
+
+.back-link{display:inline-flex; align-items:center; gap:4px; font-size:14px; color:var(--ink-soft); text-decoration:none; margin-bottom:18px;}
+.back-link:hover{color:var(--ink);}
+
+/* ---- sketch base ---- */
+.sketch{position:relative; border:2.5px solid var(--ink); z-index:0; background:var(--card);}
+.sketch::before{content:'';position:absolute;inset:-5px;border:2px solid var(--ink);opacity:.28;border-radius:inherit;z-index:-1;}
+.wob-1{border-radius:255px 18px 225px 30px/28px 225px 30px 255px;}
+.wob-2{border-radius:22px 240px 24px 235px/235px 24px 240px 22px;}
+.tilt-1{transform:rotate(-1.1deg);}
+.tilt-2{transform:rotate(0.9deg);}
+
+.sticker-tag{
+  display:inline-block; font-family:'Nanum Gothic', 'Malgun Gothic', sans-serif; font-size:14px; font-weight:700;
+  background:var(--blue); border:2px solid var(--ink); border-radius:255px 20px 225px 20px/20px 225px 20px 255px;
+  padding:3px 14px; transform:rotate(-2deg); margin-bottom:14px;
+}
+
+h1{font-size:clamp(26px,6vw,36px); line-height:1.28; margin:0 0 12px;}
+p.lede{font-size:16px; line-height:1.6; color:var(--ink-soft); max-width:52ch; margin:0 0 32px;}
+
+/* ---- project cards ---- */
+.project-card{padding:24px 22px; margin-bottom:22px;}
+.project-top{display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; margin-bottom:8px;}
+.project-name{font-size:20px; font-weight:700;}
+.project-status{font-size:11.5px; font-weight:700; padding:3px 11px; border:1.5px solid var(--ink); border-radius:999px; background:var(--mint);}
+.project-desc{font-size:14.5px; color:var(--ink-soft); line-height:1.6; margin:0 0 18px;}
+
+.sub-list{display:flex; flex-direction:column; gap:10px;}
+.sub-row{
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  padding:13px 16px; border:2px solid var(--ink); border-radius:16px 8px 16px 8px; background:#FFFCF3;
+}
+.sub-row .sub-info{display:flex; align-items:center; gap:10px; flex-wrap:wrap;}
+.sub-row .sub-name{font-size:15px; font-weight:700;}
+.sub-badge{font-size:11px; font-weight:700; padding:2px 9px; border:1.5px solid var(--ink); border-radius:999px; background:var(--yellow);}
+.sub-row .btn-go{
+  appearance:none; cursor:pointer; font-family:'Nanum Gothic', 'Malgun Gothic', sans-serif; font-size:13px; font-weight:700;
+  border:2px solid var(--ink); border-radius:255px 16px 225px 16px/16px 225px 16px 255px;
+  padding:8px 14px; background:#fff; box-shadow:2px 2px 0 var(--ink); text-decoration:none; color:var(--ink);
+  transition:transform .12s ease, box-shadow .12s ease; white-space:nowrap;
+}
+.sub-row .btn-go:hover{transform:translate(-2px,-2px); box-shadow:4px 4px 0 var(--ink);}
+
+.more-note{font-size:13.5px; color:var(--ink-soft); margin-top:16px; padding-top:14px; border-top:2px dashed var(--dotgrid);}
+
+footer.foot{text-align:center; margin-top:44px; font-size:12px; color:var(--ink-soft); font-family:'Nanum Gothic', 'Malgun Gothic', sans-serif;}
+</style>
+</head>
+<body>
+<div class="app">
+
+<div class="brand">
+<a href="index.html">
+<svg viewBox="0 0 64 64"><circle cx="32" cy="36" r="20" fill="#FFF6E0" stroke="var(--ink)" stroke-width="2.5"/><circle cx="24" cy="34" r="2" fill="var(--ink)"/><circle cx="40" cy="34" r="2" fill="var(--ink)"/><path d="M24 44 Q32 50 40 44" fill="none" stroke="var(--ink)" stroke-width="2.5" stroke-linecap="round"/><path d="M28 14 Q32 6 36 14" fill="none" stroke="var(--ink)" stroke-width="2.5" stroke-linecap="round"/><ellipse cx="18" cy="40" rx="3" ry="2" fill="var(--pink)"/><ellipse cx="46" cy="40" rx="3" ry="2" fill="var(--pink)"/></svg>
+<div class="brand-name">육아답</div>
+</a>
+</div>
+
+<a class="back-link" href="index.html">← 홈으로</a>
+
+<span class="sticker-tag">📁 Projects</span>
+<h1>프로젝트</h1>
+<p class="lede">육아답에서 만든 프로젝트들이에요. 프로젝트 안에는 여러 육아템 편이 서브 프로젝트로 들어있고, 앞으로 하나씩 늘어날 예정이에요.</p>
+
+<div id="project-list"></div>
+
+<footer class="foot">☁ 육아답 · 프로젝트는 계속 업데이트돼요 ☁</footer>
+</div>
+
+<script>
+/*
+  프로젝트/서브 프로젝트가 늘어날 때는 이 배열에 항목만 추가하면 됩니다.
+  status: 'open' (진행중/공개) | 'soon' (준비중)
+*/
+const PROJECTS = [
+  {
+    name: '육아템 매치',
+    status: 'open',
+    desc: '육아용품 뭘 사야 할지 고민될 때, 둘 중 하나씩 골라보면서 나에게 맞는 타입을 찾아드리는 프로젝트예요.',
+    subprojects: [
+      { name: '유모차 편', status: 'open', url: 'https://yukatem-match.vercel.app' }
+    ]
+  }
+];
+
+const STATUS_LABEL = { open: 'OPEN', soon: '준비중' };
+
+function renderProjects(){
+  const wrap = document.getElementById('project-list');
+  wrap.innerHTML = '';
+  PROJECTS.forEach((project, i) => {
+    const card = document.createElement('div');
+    card.className = `project-card sketch ${i % 2 === 0 ? 'wob-1 tilt-1' : 'wob-2 tilt-2'}`;
+
+    const subRows = project.subprojects.map(sub => {
+      const badge = `<span class="sub-badge">${STATUS_LABEL[sub.status] || sub.status}</span>`;
+      const goBtn = sub.url
+        ? `<a class="btn-go" href="${sub.url}" target="_blank" rel="noopener">바로가기 →</a>`
+        : `<span class="btn-go" style="opacity:.5;cursor:default;">준비중</span>`;
+      return `
+        <div class="sub-row">
+          <div class="sub-info"><span class="sub-name">${sub.name}</span>${badge}</div>
+          ${goBtn}
+        </div>`;
+    }).join('');
+
+    card.innerHTML = `
+      <div class="project-top">
+        <span class="project-name">${project.name}</span>
+        <span class="project-status">${STATUS_LABEL[project.status] || project.status}</span>
+      </div>
+      <p class="project-desc">${project.desc}</p>
+      <div class="sub-list">${subRows}</div>
+    `;
+    wrap.appendChild(card);
+  });
+
+  const note = document.createElement('p');
+  note.className = 'more-note';
+  note.textContent = '다음 프로젝트도 준비 중이에요. 하나씩 추가될 예정이에요 🌱';
+  wrap.appendChild(note);
+}
+
+renderProjects();
+</script>
+</body>
+</html>
