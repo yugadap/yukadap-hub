@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>기획안 소개 · 육아답</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap');
+
+:root{
+  --paper:#FFFCF3;
+  --dotgrid:#EAE2CC;
+  --ink:#221D17;
+  --ink-soft:#5A5347;
+  --pink:#FFC9D6;
+  --pink-d:#F79CB4;
+  --blue:#BFE3FF;
+  --blue-d:#8FCBFF;
+  --mint:#C9F2D8;
+  --mint-d:#8FE0B4;
+  --yellow:#FFE79A;
+  --yellow-d:#FFD65C;
+  --lav:#E4D8FF;
+  --lav-d:#C9B6FF;
+  --card:#FFFFFF;
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{
+  background-color:var(--paper);
+  background-image:radial-gradient(circle, var(--dotgrid) 1.3px, transparent 1.3px);
+  background-size:24px 24px;
+  color:var(--ink);
+  font-family:'Nanum Gothic', 'Malgun Gothic', sans-serif;
+  min-height:100vh;
+  -webkit-font-smoothing:antialiased;
+}
+.app{max-width:720px;margin:0 auto;padding:30px 18px 70px;min-height:100vh;}
+
+h1,h2,.font-display{font-family:'Nanum Gothic', 'Malgun Gothic', sans-serif; font-weight:700;}
+
+/* ---- brand ---- */
+.brand{display:flex;align-items:center;gap:10px;margin-bottom:28px;}
+.brand a{display:flex;align-items:center;gap:10px;text-decoration:none;color:inherit;}
+.brand svg{width:34px;height:34px;flex:none;}
+.brand-name{font-family:'Nanum Gothic', 'Malgun Gothic', sans-serif;font-size:18px;font-weight:700;}
+.back-link{display:inline-flex;align-items:center;gap:5px;font-size:13px;color:var(--ink-soft);text-decoration:none;margin-bottom:14px;}
+.back-link:hover{color:var(--ink);}
+
+/* ---- sketch base ---- */
+.sketch{position:relative; border:2.5px solid var(--ink); z-index:0; background:var(--card);}
+.sketch::before{content:'';position:absolute;inset:-5px;border:2px solid var(--ink);opacity:.28;border-radius:inherit;z-index:-1;}
+.wob-1{border-radius:255px 18px 225px 30px/28px 225px 30px 255px;}
+.wob-2{border-radius:22px 240px 24px 235px/235px 24px 240px 22px;}
+.wob-3{border-radius:20px 235px 235px 20px/230px 20px 20px 230px;}
+.tilt-1{transform:rotate(-1.1deg);}
+.tilt-2{transform:rotate(0.9deg);}
+.tilt-3{transform:rotate(-0.6deg);}
+
+.sticker-tag{
+  display:inline-block; font-family:'Nanum Gothic', 'Malgun Gothic', sans-serif; font-size:14px; font-weight:700;
+  background:var(--lav); border:2px solid var(--ink); border-radius:255px 20px 225px 20px/20px 225px 20px 255px;
+  padding:3px 14px; transform:rotate(-2deg); margin-bottom:14px;
+}
+
+h1{font-size:clamp(28px,6.4vw,42px); line-height:1.28; margin:0 0 14px;}
+h1 .hl{color:var(--ink); text-decoration:underline; text-decoration-style:wavy; text-decoration-color:var(--pink-d); text-decoration-thickness:3px; text-underline-offset:5px;}
+p.lede{font-size:18px; line-height:1.6; color:var(--ink-soft); max-width:56ch; margin:0 0 30px;}
+
+/* ---- buttons ---- */
+.btn{
+  appearance:none; cursor:pointer; font-family:'Nanum Gothic', 'Malgun Gothic', sans-serif; font-size:14px; font-weight:700;
+  border:2.5px solid var(--ink); border-radius:255px 20px 225px 20px/20px 225px 20px 255px;
+  padding:13px 20px; background:#fff; box-shadow:3px 3px 0 var(--ink);
+  transition:transform .12s ease, box-shadow .12s ease;
+  text-decoration:none; color:var(--ink); display:inline-block;
+}
+.btn:hover{transform:translate(-2px,-2px); box-shadow:5px 5px 0 var(--ink);}
+.btn:active{transform:translate(0,0); box-shadow:1px 1px 0 var(--ink);}
+.btn-primary{background:var(--yellow);}
+.btn-small{padding:9px 16px; font-size:13px; white-space:nowrap;}
+
+/* ---- content sections ---- */
+.section-title{font-size:20px; font-weight:700; margin:44px 0 6px; display:flex; align-items:center; gap:8px;}
+.section-kicker{font-size:12px; font-weight:700; color:var(--ink-soft); letter-spacing:.06em; margin:0 0 4px;}
+.section-sub{font-size:14.5px; color:var(--ink-soft); line-height:1.6; margin:0 0 18px;}
+
+.info-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-bottom:16px;}
+.info-card{padding:16px 14px;}
+.info-card .info-emoji{font-size:22px; display:block; margin-bottom:6px;}
+.info-card .info-title{font-size:14px; font-weight:700; margin-bottom:4px;}
+.info-card .info-desc{font-size:12.5px; color:var(--ink-soft); line-height:1.5;}
+@media (max-width:520px){ .info-grid{grid-template-columns:1fr;} }
+
+.quote-box{
+  padding:18px 20px; background:var(--card); margin:18px 0 8px;
+  border-left:5px solid var(--ink);
+}
+.quote-box p{margin:0; font-size:15px; line-height:1.65;}
+.quote-box .quote-label{font-size:12px; font-weight:700; color:var(--pink-d); margin-bottom:6px;}
+
+.proj-row{display:flex; align-items:flex-start; gap:12px; padding:16px 18px; margin-bottom:10px;}
+.proj-row .proj-emoji{font-size:24px; flex:none;}
+.proj-row .proj-name{font-size:15.5px; font-weight:700; margin-bottom:3px;}
+.proj-row .proj-desc{font-size:13px; color:var(--ink-soft); line-height:1.55;}
+.proj-badge{display:inline-block; font-size:10.5px; font-weight:700; padding:2px 9px; border-radius:20px; border:1.5px solid var(--ink); margin-left:6px; vertical-align:middle;}
+.proj-badge.live{background:var(--mint);}
+.proj-badge.soon{background:var(--yellow);}
+
+.roadmap-wrap{display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-bottom:8px;}
+.roadmap-col{padding:14px 14px 16px;}
+.roadmap-col .rm-kicker{font-size:11px; font-weight:700; color:var(--ink-soft); letter-spacing:.04em; margin-bottom:8px;}
+.roadmap-col ul{margin:0; padding-left:18px; font-size:12.5px; line-height:1.6;}
+.roadmap-col li{margin-bottom:5px;}
+@media (max-width:560px){ .roadmap-wrap{grid-template-columns:1fr;} }
+
+.cta-banner{
+  margin-top:36px; padding:26px 24px; text-align:center; background:var(--card);
+}
+.cta-banner .cta-emoji{font-size:28px; display:block; margin-bottom:8px;}
+.cta-banner h3{margin:0 0 8px; font-size:19px;}
+.cta-banner p{margin:0 0 18px; font-size:13.5px; color:var(--ink-soft); line-height:1.6;}
+
+footer.foot{text-align:center; margin-top:44px; font-size:12px; color:var(--ink-soft); font-family:'Nanum Gothic', 'Malgun Gothic', sans-serif;}
+</style>
+</head>
+<body>
+<div class="app">
+
+<div class="brand">
+<a href="index.html">
+<svg viewBox="0 0 64 64"><circle cx="32" cy="36" r="20" fill="#FFF6E0" stroke="var(--ink)" stroke-width="2.5"/><circle cx="24" cy="34" r="2" fill="var(--ink)"/><circle cx="40" cy="34" r="2" fill="var(--ink)"/><path d="M24 44 Q32 50 40 44" fill="none" stroke="var(--ink)" stroke-width="2.5" stroke-linecap="round"/><path d="M28 14 Q32 6 36 14" fill="none" stroke="var(--ink)" stroke-width="2.5" stroke-linecap="round"/><ellipse cx="18" cy="40" rx="3" ry="2" fill="var(--pink)"/><ellipse cx="46" cy="40" rx="3" ry="2" fill="var(--pink)"/></svg>
+<div class="brand-name">육아답</div>
+</a>
+</div>
+
+<span class="sticker-tag">📋 육아답 기획안</span>
+<h1>육아답은 왜, 어떻게<br><span class="hl">만들어지고</span> 있을까요?</h1>
+<p class="lede">육아템 고르기, 매번 검색하고 매번 헤매는 일. 그 고민을 작은 웹 프로젝트들로 하나씩 덜어내는 중이에요. 왜 시작했고, 어떻게 만들고 있고, 앞으로 어디로 갈지를 정리한 기획안이에요.</p>
+
+<p class="section-kicker">01 · WHY</p>
+<h2 class="section-title">육아템 고르기는 왜 이렇게 힘들까</h2>
+<div class="info-grid">
+<div class="info-card sketch wob-1 tilt-1">
+<span class="info-emoji">🌀</span>
+<div class="info-title">정보가 흩어져 있다</div>
+<div class="info-desc">블로그·카페·유튜브로 다 뒤져야 겨우 보는 정보 3개, 이마저도 광고인지 헷갈려요.</div>
+</div>
+<div class="info-card sketch wob-2 tilt-2">
+<span class="info-emoji">⚖️</span>
+<div class="info-title">기준이 없다</div>
+<div class="info-desc">"디럭스 vs 절충형"은 스펙 싸움이 아니라 우리 집 상황과 취향의 문제인데, 비교표는 스펙만 나열해줘요.</div>
+</div>
+<div class="info-card sketch wob-1 tilt-3">
+<span class="info-emoji">💬</span>
+<div class="info-title">부부가 안 맞는다</div>
+<div class="info-desc">예산도, 육아 방식 대화도 안 하던 사이인데, 결국 한 사람이 다 떠맡아 대게 돼요.</div>
+</div>
+</div>
+<div class="quote-box sketch">
+<p class="quote-label">그래서 육아답은</p>
+<p>"정보를 더 주는 사이트"가 아니라, <strong>고르는 과정을 놀이처럼 만들어주는</strong> 작은 도구들의 모음이에요.</p>
+</div>
+
+<p class="section-kicker">02 · STRUCTURE</p>
+<h2 class="section-title">하나의 허브, 네 개의 작은 프로젝트</h2>
+<p class="section-sub">육아답은 하나의 큰 서비스가 아니라 허브예요. 각 프로젝트는 독립적으로 만들어지고, 허브가 그 입구 역할을 해줘요.</p>
+
+<div class="proj-row sketch wob-1 tilt-1">
+<span class="proj-emoji">🛒</span>
+<div>
+<div class="proj-name">육아템 매치 <span class="proj-badge live">운영 중</span></div>
+<div class="proj-desc">둘 중 하나만 고르는 토너먼트 방식. 스펙을 비교하라면 어렵지만, 둘 중 하나를 고르라면 누구나 답할 수 있거든요.</div>
+</div>
+</div>
+<div class="proj-row sketch wob-2 tilt-2">
+<span class="proj-emoji">📝</span>
+<div>
+<div class="proj-name">육아고사 <span class="proj-badge live">운영 중</span></div>
+<div class="proj-desc">아내의 정답을 남편이 맞히는 부부 퀴즈예요. 육아 방식, 부부 생활, 교육·미래·예산까지 &mdash; 대화 없이 지나쳤던 것들을 퀴즈로 짚어봐요.</div>
+</div>
+</div>
+<div class="proj-row sketch wob-1 tilt-3">
+<span class="proj-emoji">🗺️</span>
+<div>
+<div class="proj-name">육아지도 <span class="proj-badge live">운영 중</span></div>
+<div class="proj-desc">지역별 육아 꿀정보 모음집이에요. 김포공항·속초시·구리시처럼 한 지역에 수유실, 아이 동반 식당, 병원·약국 같은 정보를 같은 템플릿으로 정리해요.</div>
+</div>
+</div>
+<div class="proj-row sketch wob-2 tilt-1">
+<span class="proj-emoji">🧩</span>
+<div>
+<div class="proj-name">육아역할 <span class="proj-badge soon">준비 중</span></div>
+<div class="proj-desc">"내가 더 많이 해"라는 말싸움 대신, 하루 24시간 타임라인 위에 할 일을 얹어봐요. 아내·남편·산후도우미·+알파로 나눠 빈칸이 어디인지 바로 보여줘요.</div>
+</div>
+</div>
+
+<p class="section-kicker">03 · ROADMAP</p>
+<h2 class="section-title">앞으로 이렇게 늘려갈 거예요</h2>
+<div class="roadmap-wrap">
+<div class="roadmap-col sketch wob-1 tilt-1">
+<div class="rm-kicker">NOW</div>
+<ul><li>육아템 매치 · 육아고사 · 육아지도 운영</li><li>허브 정비, 결과 공유 카드 붙이기</li></ul>
+</div>
+<div class="roadmap-col sketch wob-2 tilt-2">
+<div class="rm-kicker">NEXT 3개월</div>
+<ul><li>육아역할 출시 (24시간 분배표)</li><li>육아지도 지역 3곳 → 10곳</li><li>육아템 카테고리 확장 (아기띠·치발기)</li></ul>
+</div>
+<div class="roadmap-col sketch wob-1 tilt-3">
+<div class="rm-kicker">LATER</div>
+<ul><li>제휴 링크 · 지역 스폰서 리스트</li><li>"우리 집 육아 리포트" 유료 PDF</li></ul>
+</div>
+</div>
+
+<div class="cta-banner sketch wob-2 tilt-1">
+<span class="cta-emoji">🎞️</span>
+<h3>전체 기획안, 슬라이드로 보기</h3>
+<p>육아하며 겪은 불편을 하나씩 웹으로 옮기는 기록 &mdash; 10장짜리 발표자료로 더 자세히 볼 수 있어요.</p>
+<a class="btn btn-primary" href="https://claude.ai/design/p/1cefcf19-6a37-4b25-b13d-2610edd262b6?via=share&file=%EC%9C%A1%EC%95%84%EB%8B%B5+%EA%B8%B0%ED%9A%8D%EC%95%88.dc.html" target="_blank" rel="noopener">📽️ 기획안 발표자료 보러 가기 →</a>
+</div>
+
+<footer class="foot">☁ 육아답 · 육아템 고르기를 도와드려요 ☁</footer>
+</div>
+</body>
+</html>
