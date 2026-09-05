@@ -75,9 +75,24 @@ p.lede{font-size:16px; line-height:1.65; color:var(--ink-soft); max-width:56ch; 
 .role-card .role-desc{font-size:13px;color:var(--ink-soft);line-height:1.5;}
 @media (max-width:860px){.role-grid{grid-template-columns:repeat(2,1fr);}}
 @media (max-width:480px){.role-grid{grid-template-columns:1fr;}}
+
+/* ---- about hero split ---- */
+.about-hero{display:flex;min-height:420px;border-radius:24px;overflow:hidden;margin:26px 0 34px;}
+.about-left,.about-right{flex:1 1 50%;display:flex;flex-direction:column;justify-content:center;padding:48px 40px;}
+.about-left{background:#AFC3C8;}
+.about-right{background:#E4D19A;}
+.about-word{font-weight:800;font-size:clamp(38px,6vw,64px);line-height:1.15;letter-spacing:-.02em;margin:0;color:var(--ink);}
+.about-word .accent{color:#E4D19A;}
+.about-desc{font-size:clamp(17px,2.2vw,21px);font-weight:600;line-height:1.7;color:var(--ink);margin:0;}
+@media (max-width:640px){
+  .about-hero{flex-direction:column;min-height:0;}
+  .about-left,.about-right{padding:36px 26px;}
+}
 </style>
 </head>
 <body>
+<div class="app">
+
 <nav class="navbar">
 <a href="index.html" class="nav-logo">
 <svg viewBox="0 0 64 64"><circle cx="32" cy="36" r="20" fill="#FFF6E0" stroke="var(--ink)" stroke-width="2.5"/><circle cx="24" cy="34" r="2" fill="var(--ink)"/><circle cx="40" cy="34" r="2" fill="var(--ink)"/><path d="M24 44 Q32 50 40 44" fill="none" stroke="var(--ink)" stroke-width="2.5" stroke-linecap="round"/><path d="M28 14 Q32 6 36 14" fill="none" stroke="var(--ink)" stroke-width="2.5" stroke-linecap="round"/><ellipse cx="18" cy="40" rx="3" ry="2" fill="var(--pink)"/><ellipse cx="46" cy="40" rx="3" ry="2" fill="var(--pink)"/></svg>
@@ -89,39 +104,19 @@ SAY & MORE
 <a href="about.html" class="current">ABOUT</a>
 </div>
 </nav>
-<span class="sticker-tag">🏡 ABOUT</span>
-<h1>SAY & MORE는<br>무엇인가요?</h1>
-<p class="lede">육아하며 겪는 고민들에, 하나씩 답을 찾아가는 공간이에요. 준비물 체크부터 소소한 선택까지 SAY & MORE가 함께합니다.</p>
-<section class="section-block" id="about-roles">
-<p class="section-kicker">ABOUT</p>
-<h2 class="section-title">네 가지 이름, 하나의 역할표</h2>
-<p class="section-sub">SAY & MORE 안에서 각자 다른 질문에 답하고 있어요.</p>
-<div class="role-grid">
-<div class="role-card sketch wob-1 tilt-1">
-<span class="role-emoji">💬</span>
-<div class="role-name">SAY &amp; MORE</div>
-<div class="role-desc">전체 브랜드</div>
+<section class="about-hero">
+<div class="about-left">
+<p class="about-word">SAY<br><span class="accent">&amp; MORE</span></p>
 </div>
-<div class="role-card sketch wob-2 tilt-2">
-<span class="role-emoji">📋</span>
-<div class="role-name">SAYLIST</div>
-<div class="role-desc">"뭘 준비해야 하지?"에<br>답하는 곳</div>
-</div>
-<div class="role-card sketch wob-1 tilt-3">
-<span class="role-emoji">🎲</span>
-<div class="role-name">SAY PLAY</div>
-<div class="role-desc">"뭐가 나한테 맞지?"를<br>재미있게 찾아보는 곳</div>
-</div>
-<div class="role-card sketch wob-2 tilt-1">
-<span class="role-emoji">🏡</span>
-<div class="role-name">ABOUT</div>
-<div class="role-desc">"이 사이트는 뭐지?"를<br>설명하는 곳</div>
-</div>
+<div class="about-right">
+<p class="about-desc">무엇을 준비해야 할지 막막할 때<br>조금이라도 쉽게 시작할 수 있도록.<br>직접 경험하고 필요한 것들을 정리한 공간입니다.</p>
 </div>
 </section>
+
 <footer class="foot">
 © 2026 sayandmore. All rights reserved.<br>
 <a href="mailto:alsoals0@naver.com">alsoals0@naver.com</a>
 </footer>
+</div>
 </body>
 </html>
