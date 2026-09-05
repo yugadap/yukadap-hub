@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>출산가방 · SAY & MORE</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap');
+
+:root{
+  --paper:#FFFCF3;
+  --dotgrid:#EAE2CC;
+  --ink:#221D17;
+  --ink-soft:#5A5347;
+  --pink:#FFC9D6;
+  --pink-d:#F79CB4;
+  --blue:#BFE3FF;
+  --blue-d:#8FCBFF;
+  --mint:#C9F2D8;
+  --mint-d:#8FE0B4;
+  --yellow:#FFE79A;
+  --yellow-d:#FFD65C;
+  --lav:#E4D8FF;
+  --lav-d:#C9B6FF;
+  --card:#FFFFFF;
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{
+  background-color:var(--paper);
+  background-image:radial-gradient(circle, var(--dotgrid) 1.3px, transparent 1.3px);
+  background-size:24px 24px;
+  color:var(--ink);
+  font-family:'Nanum Gothic', 'Malgun Gothic', sans-serif;
+  min-height:100vh;
+  -webkit-font-smoothing:antialiased;
+}
+.app{max-width:760px;margin:0 auto;padding:0 18px 70px;min-height:100vh;}
+
+h1,h2,.font-display{font-family:'Nanum Gothic', 'Malgun Gothic', sans-serif; font-weight:700;}
+
+/* ---- navbar ---- */
+.navbar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:22px 0 26px;}
+.nav-logo{display:flex;align-items:center;gap:9px;text-decoration:none;color:inherit;font-weight:800;font-size:18px;letter-spacing:.01em;}
+.nav-logo svg{width:30px;height:30px;flex:none;}
+.nav-links{display:flex;align-items:center;gap:6px;flex-wrap:wrap;}
+.nav-links a{
+  font-family:'Nanum Gothic','Malgun Gothic',sans-serif;font-size:13px;font-weight:700;color:var(--ink);
+  text-decoration:none;padding:8px 14px;border-radius:999px;border:2px solid transparent;
+}
+.nav-links a:hover{border-color:var(--ink);background:var(--card);}
+
+/* ---- sketch base ---- */
+.sketch{position:relative; border:2.5px solid var(--ink); z-index:0; background:var(--card);}
+.sketch::before{content:'';position:absolute;inset:-5px;border:2px solid var(--ink);opacity:.28;border-radius:inherit;z-index:-1;}
+.wob-1{border-radius:255px 18px 225px 30px/28px 225px 30px 255px;}
+.wob-2{border-radius:22px 240px 24px 235px/235px 24px 240px 22px;}
+.wob-3{border-radius:20px 235px 235px 20px/230px 20px 20px 230px;}
+.tilt-1{transform:rotate(-1.1deg);}
+.tilt-2{transform:rotate(0.9deg);}
+.tilt-3{transform:rotate(-0.6deg);}
+
+.sticker-tag{
+  display:inline-block; font-family:'Nanum Gothic', 'Malgun Gothic', sans-serif; font-size:14px; font-weight:700;
+  background:var(--pink); border:2px solid var(--ink); border-radius:255px 20px 225px 20px/20px 225px 20px 255px;
+  padding:3px 14px; transform:rotate(-2deg); margin-bottom:14px;
+}
+
+h1{font-size:clamp(28px,6.4vw,40px); line-height:1.3; margin:10px 0 14px;}
+h1 .hl{color:var(--ink); text-decoration:underline; text-decoration-style:wavy; text-decoration-color:var(--pink-d); text-decoration-thickness:3px; text-underline-offset:5px;}
+p.lede{font-size:16px; line-height:1.65; color:var(--ink-soft); max-width:52ch; margin:0 0 12px;}
+
+/* ---- buttons ---- */
+.btn{
+  appearance:none; cursor:pointer; font-family:'Nanum Gothic', 'Malgun Gothic', sans-serif; font-size:14px; font-weight:700;
+  border:2.5px solid var(--ink); border-radius:255px 20px 225px 20px/20px 225px 20px 255px;
+  padding:12px 20px; background:#fff; box-shadow:3px 3px 0 var(--ink);
+  transition:transform .12s ease, box-shadow .12s ease;
+  text-decoration:none; color:var(--ink); display:inline-block;
+}
+.btn:hover{transform:translate(-2px,-2px); box-shadow:5px 5px 0 var(--ink);}
+.btn:active{transform:translate(0,0); box-shadow:1px 1px 0 var(--ink);}
+.btn-primary{background:var(--yellow);}
+.btn-small{padding:9px 16px; font-size:13px; white-space:nowrap;}
+
+.foot{text-align:center;padding:50px 24px 70px;color:var(--ink-soft);font-size:14px;}
+.section-block{max-width:1040px;margin:0 auto;padding:64px 24px;}
+.section-kicker{font-size:13px;font-weight:800;letter-spacing:.08em;color:var(--ink-soft);text-transform:uppercase;margin:0 0 8px;}
+.section-title{font-size:30px;font-weight:900;margin:0 0 10px;}
+.section-sub{font-size:15.5px;color:var(--ink-soft);margin:0 0 32px;line-height:1.6;}
+.saylist-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;}
+.saylist-card{display:block;background:var(--card);border-radius:20px;padding:26px;text-decoration:none;color:var(--ink);}
+.saylist-card .sl-emoji{font-size:30px;display:block;margin-bottom:12px;}
+.saylist-card .sl-title{font-weight:800;font-size:17px;margin-bottom:6px;}
+.saylist-card .sl-desc{font-size:13.5px;color:var(--ink-soft);line-height:1.5;}
+.play-list{display:flex;flex-direction:column;gap:20px;}
+.play-card{background:var(--card);border-radius:20px;padding:28px;display:flex;align-items:center;gap:22px;flex-wrap:wrap;}
+.play-card .play-emoji{font-size:28px;line-height:1;}
+.play-card .play-body{flex:1;min-width:220px;}
+.play-card .play-title{font-weight:800;font-size:17px;margin-bottom:6px;}
+.play-card .play-desc{font-size:13.5px;color:var(--ink-soft);line-height:1.5;}
+@media (max-width:640px){
+  .saylist-grid{grid-template-columns:1fr;}
+  .play-card{flex-direction:column;align-items:flex-start;}
+  .play-card .btn{width:100%;text-align:center;}
+}
+
+.progress-wrap{max-width:640px;margin:0 auto 36px;padding:0 24px;}
+.progress-label{font-size:13.5px;color:var(--ink-soft);margin-bottom:8px;font-weight:700;}
+.progress-bar{background:var(--dotgrid);border-radius:999px;height:14px;overflow:hidden;border:2px solid var(--ink);}
+.progress-fill{background:var(--mint-d);height:100%;width:0%;transition:width .3s ease;}
+.checklist-wrap{max-width:640px;margin:0 auto;padding:0 24px 70px;}
+.checklist-cat{background:var(--card);border-radius:20px;padding:22px 24px;margin-bottom:20px;}
+.checklist-cat-head{display:flex;align-items:center;gap:10px;font-weight:800;font-size:16.5px;margin-bottom:14px;}
+.checklist-emoji{font-size:20px;}
+.checklist-list{list-style:none;display:flex;flex-direction:column;gap:11px;margin:0;padding:0;}
+.checklist-item{display:flex;align-items:center;gap:10px;font-size:14.5px;cursor:pointer;}
+.checklist-item input[type=checkbox]{width:19px;height:19px;accent-color:var(--pink-d);cursor:pointer;flex-shrink:0;}
+.checklist-item.checked span{text-decoration:line-through;color:var(--ink-soft);}
+.back-pill{display:inline-block;margin:0 24px 18px;font-size:13px;font-weight:700;color:var(--ink-soft);text-decoration:none;}
+.back-pill:hover{color:var(--ink);}
+</style>
+</head>
+<body>
+<nav class="navbar">
+<a href="index.html" class="nav-logo">
+<svg viewBox="0 0 64 64"><circle cx="32" cy="36" r="20" fill="#FFF6E0" stroke="var(--ink)" stroke-width="2.5"/><circle cx="24" cy="34" r="2" fill="var(--ink)"/><circle cx="40" cy="34" r="2" fill="var(--ink)"/><path d="M24 44 Q32 50 40 44" fill="none" stroke="var(--ink)" stroke-width="2.5" stroke-linecap="round"/><path d="M28 14 Q32 6 36 14" fill="none" stroke="var(--ink)" stroke-width="2.5" stroke-linecap="round"/><ellipse cx="18" cy="40" rx="3" ry="2" fill="var(--pink)"/><ellipse cx="46" cy="40" rx="3" ry="2" fill="var(--pink)"/></svg>
+SAY & MORE
+</a>
+<div class="nav-links">
+<a href="index.html#saylist">SAYLIST</a>
+<a href="index.html#say-play">SAY PLAY</a>
+<a href="about.html">ABOUT</a>
+</div>
+</nav>
+<a class="back-pill" href="index.html#saylist">← SAYLIST로 돌아가기</a>
+<span class="sticker-tag">🏥 출산가방</span>
+<h1>병원 &amp; 조리원,<br>이 가방 하나면 든든해요</h1>
+<p class="lede">출산일이 다가올수록 마음이 바빠지죠. 병원과 조리원에서 필요한 것들을 미리 챙겨두면, 그날은 몸만 가도 될 만큼 든든해요.</p>
+<div class="progress-wrap">
+<div class="progress-label" id="progress-label">0 / 0 완료</div>
+<div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+</div>
+<div class="checklist-wrap">
+<div class="checklist-cat">
+<div class="checklist-cat-head"><span class="checklist-emoji">👜</span><span>엄마 서류 & 필수품</span></div>
+<ul class="checklist-list">
+<li class="checklist-item"><input type="checkbox" data-id="item-0"><span>산모수첩 (임신확인서류)</span></li>
+<li class="checklist-item"><input type="checkbox" data-id="item-1"><span>신분증 & 도장</span></li>
+<li class="checklist-item"><input type="checkbox" data-id="item-2"><span>출산 예약 확인증</span></li>
+<li class="checklist-item"><input type="checkbox" data-id="item-3"><span>건강보험카드</span></li>
+<li class="checklist-item"><input type="checkbox" data-id="item-4"><span>현금 & 카드 (조리원 입금용)</span></li>
+<li class="checklist-item"><input type="checkbox" data-id="item-5"><span>휴대폰 충전기 (긴 케이블)</span></li>
+<li class="checklist-item"><input type="checkbox" data-id="item-6"><span>보조배터리</span></li>
+</ul>
+</div>
+<div class="checklist-cat">
+<div class="checklist-cat-head"><span class="checklist-emoji">🤱</span><span>엄마 입원용품 (병원)</span></div>
+<ul class="checklist-list">
+<li class="checklist-item"><input type="checkbox" data-id="item-7"><span>환자복 여벌</span></li>
+<li class="checklist-item"><input type="checkbox" data-id="item-8"><span>산모패드 (대형/특대형)</span></li>
+<li class="checklist-item"><input type="checkbox" data-id="item-9"><span>수유브라 2~3개</span></li>
+<li class="checklist-item"><input type="checkbox" data-id="item-10"><span>수유패드</span></li>
+<li class="checklist-item"><input type="checkbox" data-id="item-11"><span>편안한 잠옷 & 카디건</span></li>
+<li class="checklist-item"><input type="checkbox" data-id="item-12"><span>개인 세면도구 (칫솔, 치약, 샴푸)</span></li>
+<li class="checklist-item"><input type="checkbox" data-id="item-13"><span>손수건 & 수건 여러 장</span></li>
+<li class="checklist-item"><input type="checkbox" data-id="item-14"><span>슬리퍼</span></li>
+</ul>
+</div>
+<div class="checklist-cat">
+<div class="checklist-cat-head"><span class="checklist-emoji">🛌</span><span>산모 조리원 준비물</span></div>
+<ul class="checklist-list">
+<li class="checklist-item"><input type="checkbox" data-id="item-15"><span>산모용 복대 (골반벨트)</span></li>
+<li class="checklist-item"><input type="checkbox" data-id="item-16"><span>좌욕기 & 좌욕제</span></li>
+<li class="checklist-item"><input type="checkbox" data-id="item-17"><span>유두보호기 & 마사지오일</span></li>
+<li class="checklist-item"><input type="checkbox" data-id="item-18"><span>수유쿠션</span></li>
+<li class="checklist-item"><input type="checkbox" data-id="item-19"><span>편한 원피스형 수유복</span></li>
+<li class="checklist-item"><input type="checkbox" data-id="item-20"><span>무릎담요</span></li>
+<li class="checklist-item"><input type="checkbox" data-id="item-21"><span>개인 컵 & 텀블러</span></li>
+<li class="checklist-item"><input type="checkbox" data-id="item-22"><span>항균 물티슈</span></li>
+</ul>
+</div>
+<div class="checklist-cat">
+<div class="checklist-cat-head"><span class="checklist-emoji">👶</span><span>신생아 준비물</span></div>
+<ul class="checklist-list">
+<li class="checklist-item"><input type="checkbox" data-id="item-23"><span>배냇저고리 2~3벌</span></li>
+<li class="checklist-item"><input type="checkbox" data-id="item-24"><span>속싸개 2장</span></li>
+<li class="checklist-item"><input type="checkbox" data-id="item-25"><span>손싸개 & 발싸개</span></li>
+<li class="checklist-item"><input type="checkbox" data-id="item-26"><span>기저귀 (신생아용) 1팩</span></li>
+<li class="checklist-item"><input type="checkbox" data-id="item-27"><span>아기 물티슈</span></li>
+<li class="checklist-item"><input type="checkbox" data-id="item-28"><span>배냇모자</span></li>
+<li class="checklist-item"><input type="checkbox" data-id="item-29"><span>신생아용 손톱가위</span></li>
+<li class="checklist-item"><input type="checkbox" data-id="item-30"><span>아기 담요 (외출용)</span></li>
+</ul>
+</div>
+<div class="checklist-cat">
+<div class="checklist-cat-head"><span class="checklist-emoji">📸</span><span>그 외 챙기면 좋은 것</span></div>
+<ul class="checklist-list">
+<li class="checklist-item"><input type="checkbox" data-id="item-31"><span>카메라 or 폴라로이드</span></li>
+<li class="checklist-item"><input type="checkbox" data-id="item-32"><span>보호자 세면도구 & 여벌옷</span></li>
+<li class="checklist-item"><input type="checkbox" data-id="item-33"><span>간단한 간식 (초콜릿, 견과류)</span></li>
+<li class="checklist-item"><input type="checkbox" data-id="item-34"><span>목베개 (분만 대기 시)</span></li>
+<li class="checklist-item"><input type="checkbox" data-id="item-35"><span>이어폰 (진통 중 음악)</span></li>
+</ul>
+</div>
+</div>
+<footer class="foot">☁ SAY & MORE · 육아하며 겪은 고민에, 하나씩 답을 찾아가요 ☁</footer>
+<script>
+(function(){
+  var KEY = 'saylist-birth-bag-v1';
+  var boxes = document.querySelectorAll('.checklist-item input[type=checkbox]');
+  var saved = {};
+  try { saved = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch(e){ saved = {}; }
+  function updateProgress(){
+    var total = boxes.length;
+    var checked = document.querySelectorAll('.checklist-item input:checked').length;
+    document.getElementById('progress-fill').style.width = (total ? (checked/total*100) : 0) + '%';
+    document.getElementById('progress-label').textContent = checked + ' / ' + total + ' 완료';
+  }
+  boxes.forEach(function(b){
+    if (saved[b.dataset.id]) { b.checked = true; b.closest('.checklist-item').classList.add('checked'); }
+    b.addEventListener('change', function(){
+      saved[b.dataset.id] = b.checked;
+      try { localStorage.setItem(KEY, JSON.stringify(saved)); } catch(e){}
+      b.closest('.checklist-item').classList.toggle('checked', b.checked);
+      updateProgress();
+    });
+  });
+  updateProgress();
+})();
+</script>
+</body>
+</html>
