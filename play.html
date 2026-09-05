@@ -82,6 +82,15 @@ p.lede{font-size:16px; line-height:1.65; color:var(--ink-soft); max-width:52ch; 
 .btn:active{transform:translate(0,0); box-shadow:1px 1px 0 var(--ink);}
 .btn-primary{background:var(--yellow);}
 .btn-small{padding:9px 16px; font-size:13px; white-space:nowrap;}
+.btn-box{
+  appearance:none; cursor:pointer; font-family:'Pretendard', 'Malgun Gothic', sans-serif; font-size:14px; font-weight:700;
+  border:none; border-radius:12px;
+  padding:12px 22px; background:var(--ink); color:#fff;
+  text-decoration:none; display:inline-block; text-align:center; white-space:nowrap;
+  transition:opacity .15s ease, transform .15s ease;
+}
+.btn-box:hover{opacity:.82;}
+.btn-box:active{transform:scale(.97);}
 
 .foot{text-align:center;padding:50px 24px 70px;color:var(--ink-soft);font-size:14px;}
 .section-block{max-width:1040px;margin:0 auto;padding:64px 24px;}
@@ -102,7 +111,7 @@ p.lede{font-size:16px; line-height:1.65; color:var(--ink-soft); max-width:52ch; 
 @media (max-width:640px){
   .saylist-grid{grid-template-columns:1fr;}
   .play-card{flex-direction:column;align-items:flex-start;}
-  .play-card .btn{width:100%;text-align:center;}
+  .play-card .btn,.play-card .btn-box{width:100%;text-align:center;}
 }
 
 .hero-clean{padding:8px 0 40px;}
@@ -182,7 +191,7 @@ SAY & MORE
 <p class="play-title">육아템매치</p>
 <p class="play-desc">필요한 육아템을 하나씩 골라보는 매칭 게임</p>
 </div>
-<a href="projects.html" class="btn">매치하러 가기</a>
+<a href="projects.html" class="btn-box">매치하러 가기</a>
 </div>
 <div class="play-card">
 <span class="play-emoji">📝</span>
@@ -190,7 +199,7 @@ SAY & MORE
 <p class="play-title">육아고사</p>
 <p class="play-desc">육아 상식을 테스트해보는 밸런스 게임</p>
 </div>
-<a href="https://yuk-gosa.vercel.app" class="btn" target="_blank" rel="noopener">고사보러 가기</a>
+<a href="https://yuk-gosa.vercel.app" class="btn-box" target="_blank" rel="noopener">고사보러 가기</a>
 </div>
 </div>
 </section>
