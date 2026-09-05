@@ -133,6 +133,29 @@ p.lede{font-size:16px; line-height:1.65; color:var(--ink-soft); max-width:52ch; 
 .play-card .play-desc{font-size:13px;color:var(--ink-soft);line-height:1.55;}
 
 footer.foot{text-align:center; margin-top:56px; font-size:12px; color:var(--ink-soft); font-family:'Pretendard', 'Malgun Gothic', sans-serif;}
+
+/* ---- main carousel ---- */
+.carousel{position:relative;margin:26px 0 34px;border-radius:24px;overflow:hidden;background:var(--card);}
+.carousel-track{display:flex;width:300%;transition:transform .45s cubic-bezier(.65,0,.35,1);touch-action:pan-y;}
+.carousel-slide{width:33.3333%;flex:none;}
+.slide-visual{display:flex;align-items:center;justify-content:space-between;padding:34px 28px;min-height:120px;}
+.slide-emoji{font-size:46px;line-height:1;}
+.slide-word{font-size:clamp(30px,8vw,48px);font-weight:800;letter-spacing:-.02em;color:var(--ink);opacity:.82;}
+.slide-list .slide-visual{background:var(--pink);}
+.slide-play .slide-visual{background:var(--blue);}
+.slide-about .slide-visual{background:var(--lav);}
+.slide-bar{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:18px 22px;flex-wrap:wrap;}
+.slide-list .slide-bar{background:var(--pink-d);}
+.slide-play .slide-bar{background:var(--blue-d);}
+.slide-about .slide-bar{background:var(--lav-d);}
+.slide-bar-title{font-size:13.5px;font-weight:700;color:var(--ink);line-height:1.5;margin:0;}
+.slide-cta{display:inline-flex;align-items:center;gap:4px;font-size:12.5px;font-weight:800;color:var(--ink);text-decoration:none;background:var(--card);padding:8px 14px;border-radius:999px;white-space:nowrap;}
+.carousel-arrow{position:absolute;top:60px;transform:translateY(-50%);width:36px;height:36px;border-radius:50%;border:none;background:var(--card);color:var(--ink);font-size:19px;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 2px 6px rgba(34,29,23,.18);z-index:2;padding:0;}
+.carousel-arrow.prev{left:12px;}
+.carousel-arrow.next{right:12px;}
+.carousel-dots{position:absolute;left:22px;bottom:18px;display:flex;gap:6px;z-index:2;}
+.dot{width:7px;height:7px;border-radius:50%;border:none;background:rgba(34,29,23,.32);padding:0;cursor:pointer;}
+.dot.active{background:var(--ink);width:18px;border-radius:4px;}
 </style>
 </head>
 <body>
@@ -144,12 +167,45 @@ footer.foot{text-align:center; margin-top:56px; font-size:12px; color:var(--ink-
 SAY & MORE
 </a>
 <div class="nav-links">
-<a href="index.html#saylist">SAYLIST</a>
-<a href="index.html#say-play">SAY PLAY</a>
+<a href="index.html#saylist">LIST</a>
+<a href="index.html#say-play">PLAY</a>
 <a href="about.html">ABOUT</a>
 </div>
-</nav><div class="hero-clean">
-<h1 class="hero-heading">무엇을 준비해야 할지 막막할 때<br>조금이라도 쉽게 시작할 수 있도록<br>직접 경험하고 필요한 것들을 정리해<br>리스트업합니다.</h1>
+</nav><div class="carousel" id="mainCarousel">
+<div class="carousel-track" id="carouselTrack">
+
+<div class="carousel-slide slide-list" data-index="0">
+<div class="slide-visual"><span class="slide-emoji">📋</span><span class="slide-word">LIST</span></div>
+<div class="slide-bar">
+<p class="slide-bar-title">필요한 것만 담았어요.<br>하나씩 체크해보세요.</p>
+<a href="#saylist" class="slide-cta">체크리스트 둘러보기 →</a>
+</div>
+</div>
+
+<div class="carousel-slide slide-play" data-index="1">
+<div class="slide-visual"><span class="slide-emoji">🎲</span><span class="slide-word">PLAY</span></div>
+<div class="slide-bar">
+<p class="slide-bar-title">고민될 땐가벼운 게임으로.<br>육아템 매칭·밸런스게임</p>
+<a href="#say-play" class="slide-cta">플레이 하러 가기 →</a>
+</div>
+</div>
+
+<div class="carousel-slide slide-about" data-index="2">
+<div class="slide-visual"><span class="slide-emoji">💬</span><span class="slide-word">ABOUT</span></div>
+<div class="slide-bar">
+<p class="slide-bar-title">SAY &amp; MORE는 어떤 이야기를 담고 있을까요?</p>
+<a href="about.html" class="slide-cta">자세히 보기 →</a>
+</div>
+</div>
+
+</div>
+<button class="carousel-arrow prev" id="carouselPrev" aria-label="이전 화면">‹</button>
+<button class="carousel-arrow next" id="carouselNext" aria-label="다음 화면">›</button>
+<div class="carousel-dots" id="carouselDots">
+<button class="dot active" data-index="0" aria-label="1"></button>
+<button class="dot" data-index="1" aria-label="2"></button>
+<button class="dot" data-index="2" aria-label="3"></button>
+</div>
 </div>
 <section class="section-block" id="saylist">
 <h2 class="section-title">SAYLIST</h2>
@@ -204,5 +260,33 @@ SAY & MORE
 
 <footer class="foot">☁ SAY & MORE · 육아하며 겪은 고민에, 하나씩 답을 찾아가요 ☁</footer>
 </div>
+<script>
+(function(){
+  var track = document.getElementById('carouselTrack');
+  if(!track) return;
+  var dots = document.querySelectorAll('#carouselDots .dot');
+  var prevBtn = document.getElementById('carouselPrev');
+  var nextBtn = document.getElementById('carouselNext');
+  var total = 3;
+  var current = 0;
+  function render(){
+    track.style.transform = 'translateX(-' + (current * (100/total)) + '%)';
+    dots.forEach(function(d,i){ d.classList.toggle('active', i===current); });
+  }
+  function goTo(i){ current = (i+total)%total; render(); }
+  prevBtn.addEventListener('click', function(){ goTo(current-1); });
+  nextBtn.addEventListener('click', function(){ goTo(current+1); });
+  dots.forEach(function(d){ d.addEventListener('click', function(){ goTo(parseInt(d.dataset.index,10)); }); });
+  var startX = null;
+  track.addEventListener('touchstart', function(e){ startX = e.touches[0].clientX; }, {passive:true});
+  track.addEventListener('touchend', function(e){
+    if(startX===null) return;
+    var dx = e.changedTouches[0].clientX - startX;
+    if(Math.abs(dx) > 40){ if(dx < 0){ goTo(current+1); } else { goTo(current-1); } }
+    startX = null;
+  }, {passive:true});
+  render();
+})();
+</script>
 </body>
 </html>
