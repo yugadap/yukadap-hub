@@ -76,17 +76,13 @@ p.lede{font-size:16px; line-height:1.65; color:var(--ink-soft); max-width:56ch; 
 @media (max-width:860px){.role-grid{grid-template-columns:repeat(2,1fr);}}
 @media (max-width:480px){.role-grid{grid-template-columns:1fr;}}
 
-/* ---- about hero split ---- */
-.about-hero{display:flex;min-height:420px;border-radius:24px;overflow:hidden;margin:26px 0 34px;}
-.about-left,.about-right{flex:1 1 50%;display:flex;flex-direction:column;justify-content:center;padding:48px 40px;}
-.about-left{background:#AFC3C8;}
-.about-right{background:#EFE2BC;}
-.about-word{font-weight:800;font-size:clamp(38px,6vw,64px);line-height:1.15;letter-spacing:-.02em;margin:0;color:var(--ink);}
-.about-word .accent{color:#FFFFFF;}
-.about-desc{font-size:clamp(17px,2.2vw,21px);font-weight:600;line-height:1.7;color:var(--ink);margin:0;}
+/* ---- about statement card ---- */
+.about-card{background:var(--card);border-radius:24px;padding:64px 52px;margin:26px 0 34px;}
+.about-mark{display:block;margin-bottom:36px;}
+.about-statement{font-weight:700;font-size:clamp(19px,2.6vw,25px);line-height:1.75;letter-spacing:-.01em;color:var(--ink);margin:0;}
 @media (max-width:640px){
-  .about-hero{flex-direction:column;min-height:0;}
-  .about-left,.about-right{padding:36px 26px;}
+  .about-card{padding:44px 28px;}
+  .about-mark{margin-bottom:26px;}
 }
 </style>
 </head>
@@ -104,13 +100,9 @@ SAY & MORE
 <a href="about.html" class="current">ABOUT</a>
 </div>
 </nav>
-<section class="about-hero">
-<div class="about-left">
-<p class="about-word">SAY<br><span class="accent">&amp; MORE</span></p>
-</div>
-<div class="about-right">
-<p class="about-desc">무엇을 준비해야 할지 막막할 때<br>조금이라도 쉽게 시작할 수 있도록.<br>직접 경험하고 필요한 것들을 정리한 공간입니다.</p>
-</div>
+<section class="about-card">
+<svg class="about-mark" width="30" height="30" viewBox="0 0 24 24" fill="none"><path d="M12 1.5 L14.3 9.7 L22.5 12 L14.3 14.3 L12 22.5 L9.7 14.3 L1.5 12 L9.7 9.7 Z" fill="var(--ink)"/></svg>
+<p class="about-statement">임신부터 출산, 육아까지<br>준비해야 할 것도, 알아봐야 할 것도 참 많았습니다.<br>막막할 때마다 하나씩 찾아보고,<br>직접 경험하며 필요한 것들을 하나씩 기록해왔어요.<br><br>그렇게 쌓인 경험과 기록이<br>누군가에게도 도움이 되길 바라며<br>SAY&amp;MORE를 만들었습니다.<br><br>제가 경험하며 알게 된 것들을<br>필요한 순간에 편하게 찾아볼 수 있도록 나눌게요.</p>
 </section>
 
 <footer class="foot">
