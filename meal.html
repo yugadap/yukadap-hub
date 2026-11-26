@@ -8,11 +8,13 @@
 <meta property="og:title" content="이유식 노트 | SAY & MORE">
 <meta property="og:description" content="끼니마다 먹은 양과 재료, 새 재료 3일 관찰, 이상반응을 기록합니다.">
 <meta property="og:type" content="website">
+<meta name="color-scheme" content="light">
 <title>이유식 노트 | SAY & MORE</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@1.3.9/dist/web/static/pretendard.css">
 <style>
-@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@1.3.9/dist/web/static/pretendard.css');
 :root{
-  --paper:#FFFCF3; --dotgrid:#EAE2CC; --ink:#221D17; --ink-soft:#5A5347; --line:#D9D0BA; --line-soft:#ECE5D3;
+  --paper:#FFFCF3; --dotgrid:#EAE2CC; --ink:#221D17; --ink-soft:#5A5347; --line:#D9D0BA; --line-soft:#ECE5D3; --ctl:#8F8673;
   --card:#FFFFFF; --yellow:#FFE79A; --yellow-d:#F2C94C;
   --new:#2F7D57; --new-bg:#E3F4EA;
   --warn:#9A5B00; --warn-bg:#FFF1CC;
@@ -42,17 +44,17 @@ button{cursor:pointer;touch-action:manipulation;}
 
 /* nav (site) */
 .navbar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:22px 0 8px;}
-.nav-logo{display:flex;align-items:center;gap:9px;text-decoration:none;color:inherit;font-weight:800;font-size:18px;}
+.nav-logo{display:flex;align-items:center;min-height:44px;gap:9px;text-decoration:none;color:inherit;font-weight:800;font-size:18px;}
 .nav-logo svg{width:30px;height:30px;flex:none;}
 .nav-links{display:flex;gap:4px;flex-wrap:wrap;}
-.nav-links a{font-size:13px;font-weight:700;color:var(--ink);text-decoration:none;padding:8px 12px;border-radius:999px;border:2px solid transparent;transition:border-color var(--m-in) var(--ease),background var(--m-in) var(--ease);}
+.nav-links a{font-size:13px;font-weight:700;color:var(--ink);text-decoration:none;padding:0 12px;min-height:44px;display:inline-flex;align-items:center;border-radius:999px;border:2px solid transparent;transition:border-color var(--m-in) var(--ease),background var(--m-in) var(--ease);}
 .nav-links a:hover{border-color:var(--ink);background:var(--card);}
 .nav-links a[aria-current]{border-color:var(--ink);background:var(--card);}
 
 /* header */
 .head{padding:36px 0 8px;}
 .eyebrow{font-size:13px;font-weight:700;color:var(--ink-soft);margin:0 0 6px;}
-h1{font-size:clamp(28px,7vw,40px);line-height:1.2;letter-spacing:-.02em;margin:0;font-weight:800;}
+h1{text-wrap:balance;font-size:clamp(28px,7vw,40px);line-height:1.2;letter-spacing:-.02em;margin:0;font-weight:800;}
 .baby-line{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 14px;margin-top:12px;font-size:15px;color:var(--ink-soft);}
 .baby-line b{color:var(--ink);font-weight:700;}
 .link{background:none;border:0;padding:0;font-weight:700;color:var(--ink);text-decoration:underline;text-decoration-thickness:1.5px;text-underline-offset:4px;text-decoration-color:var(--line);transition:text-decoration-color var(--m-in) var(--ease);min-height:44px;}
@@ -63,13 +65,14 @@ h1{font-size:clamp(28px,7vw,40px);line-height:1.2;letter-spacing:-.02em;margin:0
 .tabs button{position:relative;border:0;background:none;padding:12px 0;font-size:16px;font-weight:700;color:var(--ink-soft);min-height:48px;transition:color var(--m-in) var(--ease);}
 .tabs button:hover{color:var(--ink);}
 .tabs button[aria-selected="true"]{color:var(--ink);}
-.tab-ind{position:absolute;bottom:-1.5px;left:0;height:3px;background:var(--ink);border-radius:2px;transition:transform var(--m-slide) var(--ease),width var(--m-slide) var(--ease);}
+.tabs button::after{content:'';position:absolute;left:0;right:0;bottom:-1.5px;height:3px;background:var(--ink);border-radius:2px;transform:scaleX(0);transition:transform var(--m-slide) var(--ease);}
+.tabs button[aria-selected="true"]::after{transform:scaleX(1);}
 
 /* sheet (one card recipe) */
 .sheet-card{background:var(--card);border:1.5px solid var(--ink);border-radius:var(--r-lg);}
 .pad{padding:20px 22px;}
-h2{font-size:20px;font-weight:800;margin:0 0 6px;letter-spacing:-.01em;}
-.lead{font-size:16px;color:var(--ink-soft);margin:0 0 18px;max-width:52ch;}
+h2{text-wrap:balance;font-size:20px;font-weight:800;margin:0 0 6px;letter-spacing:-.01em;}
+.lead{text-wrap:pretty;font-size:16px;color:var(--ink-soft);margin:0 0 18px;max-width:52ch;}
 .section{margin-top:36px;}
 
 /* date row */
@@ -92,7 +95,9 @@ h2{font-size:20px;font-weight:800;margin:0 0 6px;letter-spacing:-.01em;}
 .log li:hover{background:#FFFDF6;}
 .log li.has-react::before{content:'';position:absolute;left:0;top:12px;bottom:12px;width:4px;background:var(--bad);border-radius:0 3px 3px 0;}
 .log time{font-size:17px;font-weight:800;padding-top:1px;}
-.log .menu{font-size:17px;font-weight:700;}
+.log li > div{min-width:0;}
+.log .menu{font-size:17px;font-weight:700;overflow-wrap:anywhere;}
+.log .meta{overflow-wrap:anywhere;}
 .log .meta{font-size:14px;color:var(--ink-soft);margin-top:2px;}
 .log .react{font-size:14px;color:var(--bad);font-weight:700;margin-top:6px;}
 .log .edit{font-size:14px;}
@@ -101,7 +106,7 @@ h2{font-size:20px;font-weight:800;margin:0 0 6px;letter-spacing:-.01em;}
 
 /* tags */
 .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;}
-.tag{display:inline-flex;align-items:center;gap:5px;font-size:13px;font-weight:600;padding:3px 9px;border-radius:6px;background:var(--paper);border:1px solid var(--line);}
+.tag{max-width:100%;overflow-wrap:anywhere;display:inline-flex;align-items:center;gap:5px;font-size:13px;font-weight:600;padding:3px 9px;border-radius:6px;background:var(--paper);border:1px solid var(--line);}
 .tag.new{background:var(--new-bg);border-color:transparent;color:var(--new);}
 .tag.allergen{background:var(--allergen-bg);border-color:transparent;color:var(--allergen);}
 .tag .k{font-size:11px;font-weight:800;letter-spacing:.04em;}
@@ -118,7 +123,7 @@ h2{font-size:20px;font-weight:800;margin:0 0 6px;letter-spacing:-.01em;}
 /* filter */
 .filter{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px;}
 .filter input{position:absolute;opacity:0;pointer-events:none;}
-.filter label{font-size:14px;font-weight:700;padding:9px 12px;border-radius:var(--r-sm);border:1.5px solid var(--line);background:var(--card);cursor:pointer;min-height:44px;display:inline-flex;align-items:center;gap:6px;transition:border-color var(--m-in) var(--ease);}
+.filter label{font-size:14px;font-weight:700;padding:9px 12px;border-radius:var(--r-sm);border:1.5px solid var(--ctl);background:var(--card);cursor:pointer;min-height:44px;display:inline-flex;align-items:center;gap:6px;transition:border-color var(--m-in) var(--ease);}
 .filter label:hover{border-color:var(--ink);}
 .filter label small{font-size:13px;color:var(--ink-soft);font-weight:600;}
 .filter input:checked + label{border-color:var(--ink);background:var(--ink);color:var(--paper);}
@@ -129,7 +134,8 @@ h2{font-size:20px;font-weight:800;margin:0 0 6px;letter-spacing:-.01em;}
 .rows{list-style:none;margin:0;padding:0;}
 .rows li{display:grid;grid-template-columns:1fr auto auto;gap:6px 16px;align-items:center;padding:14px 22px;border-top:1px solid var(--line-soft);}
 .rows li:first-child{border-top:0;}
-.rows .nm{font-weight:700;font-size:16px;}
+.rows .nm{font-weight:700;font-size:16px;min-width:0;overflow-wrap:anywhere;}
+.rows li{content-visibility:auto;contain-intrinsic-size:auto 64px;}
 .rows .sub{font-size:13.5px;color:var(--ink-soft);grid-column:1/-1;margin-top:-4px;}
 .days{display:flex;gap:4px;}
 .days i{width:22px;height:8px;border-radius:2px;background:var(--line-soft);}
@@ -176,6 +182,7 @@ h2{font-size:20px;font-weight:800;margin:0 0 6px;letter-spacing:-.01em;}
 
 /* dialog */
 dialog{border:1.5px solid var(--ink);border-radius:var(--r-lg);padding:0;width:min(540px,calc(100vw - 24px));max-height:calc(100dvh - 24px);background:var(--card);color:var(--ink);}
+dialog{overscroll-behavior:contain;}
 dialog::backdrop{background:rgba(34,29,23,.4);}
 dialog[open]{animation:dlg-in 200ms var(--ease);}
 @keyframes dlg-in{from{opacity:0;transform:translateY(12px);}}
@@ -189,14 +196,14 @@ dialog[open]{animation:dlg-in 200ms var(--ease);}
 .field .hint{font-size:13.5px;color:var(--ink-soft);margin:6px 0 0;}
 .field .err{font-size:14px;color:var(--bad);font-weight:700;margin:6px 0 0;}
 .field.invalid input{border-color:var(--bad);}
-input[type=text],input[type=time],input[type=date],input[type=number],textarea{width:100%;border:1.5px solid var(--line);border-radius:var(--r-sm);padding:11px 12px;background:#fff;font-size:16px;min-height:48px;transition:border-color var(--m-in) var(--ease);}
+input[type=text],input[type=time],input[type=date],input[type=number],textarea{width:100%;border:1.5px solid var(--ctl);border-radius:var(--r-sm);padding:11px 12px;background:#fff;font-size:16px;min-height:48px;transition:border-color var(--m-in) var(--ease);}
 input:hover,textarea:hover{border-color:var(--ink-soft);}
 input:focus,textarea:focus{border-color:var(--ink);outline:none;box-shadow:0 0 0 3px var(--yellow);}
 textarea{min-height:76px;resize:vertical;}
 .row2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
 .choice{display:flex;flex-wrap:wrap;gap:6px;}
 .choice input{position:absolute;opacity:0;pointer-events:none;}
-.choice label{font-size:15px;font-weight:600;border:1.5px solid var(--line);border-radius:var(--r-sm);padding:0 14px;background:#fff;cursor:pointer;min-height:44px;display:inline-flex;align-items:center;transition:border-color var(--m-in) var(--ease),background var(--m-in) var(--ease);}
+.choice label{font-size:15px;font-weight:600;border:1.5px solid var(--ctl);border-radius:var(--r-sm);padding:0 14px;background:#fff;cursor:pointer;min-height:44px;display:inline-flex;align-items:center;transition:border-color var(--m-in) var(--ease),background var(--m-in) var(--ease);}
 .choice label:hover{border-color:var(--ink);}
 .choice input:checked + label{border-color:var(--ink);background:var(--yellow);font-weight:800;}
 .choice input:focus-visible + label{outline:3px solid var(--ink);outline-offset:2px;}
@@ -209,25 +216,28 @@ textarea{min-height:76px;resize:vertical;}
 .picked{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;}
 .picked:empty{display:none;}
 .picked .tag{padding:2px 4px 2px 10px;font-size:14px;}
-.picked .tag button{border:0;background:none;width:32px;height:32px;display:grid;place-items:center;border-radius:4px;color:inherit;}
+.picked .tag button{border:0;background:none;width:40px;height:40px;margin:-4px -2px;display:grid;place-items:center;border-radius:4px;color:inherit;}
 .picked .tag button:hover{background:rgba(34,29,23,.08);}
 .suggest{margin-top:12px;}
 .suggest p{font-size:13px;color:var(--ink-soft);margin:0 0 6px;font-weight:600;}
 .suggest div{display:flex;flex-wrap:wrap;gap:6px;}
-.suggest button{border:1px solid var(--line);background:var(--paper);border-radius:6px;padding:0 10px;font-size:14px;min-height:36px;transition:border-color var(--m-in) var(--ease);}
+.suggest button{border:1px solid var(--ctl);background:var(--paper);border-radius:6px;padding:0 12px;font-size:14px;min-height:44px;transition:border-color var(--m-in) var(--ease);}
 .suggest button:hover{border-color:var(--ink);}
 .stepper{display:grid;grid-template-columns:48px 1fr 48px;gap:8px;}
 .stepper input{text-align:center;font-weight:800;font-size:18px;}
 .stepper .sq{width:48px;height:48px;font-size:22px;font-weight:700;}
 .presets{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap;}
-.presets button{border:1px solid var(--line);background:var(--paper);border-radius:6px;padding:0 12px;min-height:36px;font-size:14px;font-weight:600;}
+.presets button{border:1px solid var(--ctl);background:var(--paper);border-radius:6px;padding:0 14px;min-height:44px;font-size:14px;font-weight:600;}
 .presets button:hover{border-color:var(--ink);}
 .x{background:none;border:0;width:44px;height:44px;display:grid;place-items:center;border-radius:var(--r-sm);margin-right:-10px;}
 .x:hover{background:var(--paper);}
 .x svg{width:20px;height:20px;}
 
 .toast{position:fixed;left:50%;bottom:calc(92px + env(safe-area-inset-bottom));transform:translateX(-50%) translateY(10px);opacity:0;background:var(--ink);color:var(--paper);padding:12px 18px;border-radius:var(--r-sm);font-weight:600;font-size:15px;transition:opacity 200ms var(--ease),transform 200ms var(--ease);pointer-events:none;z-index:50;width:max-content;max-width:calc(100vw - 40px);text-align:center;}
-.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);pointer-events:auto;}
+.toast{display:flex;align-items:center;gap:14px;}
+.toast button{background:none;border:0;color:var(--yellow);font-weight:800;text-decoration:underline;text-underline-offset:3px;min-height:44px;padding:0 4px;}
+.toast button:empty{display:none;}
 .foot{text-align:center;margin-top:56px;font-size:12px;color:var(--ink-soft);}
 [hidden]{display:none !important;}
 
@@ -253,7 +263,7 @@ textarea{min-height:76px;resize:vertical;}
 <a class="skip" href="#main">본문 바로가기</a>
 <div class="app">
 <nav class="navbar" aria-label="주 메뉴">
-<a href="index.html" class="nav-logo">
+<a href="index.html" class="nav-logo" translate="no">
 <svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="36" r="20" fill="#FFF6E0" stroke="#221D17" stroke-width="2.5"/><circle cx="24" cy="34" r="2" fill="#221D17"/><circle cx="40" cy="34" r="2" fill="#221D17"/><path d="M24 44 Q32 50 40 44" fill="none" stroke="#221D17" stroke-width="2.5" stroke-linecap="round"/><path d="M28 14 Q32 6 36 14" fill="none" stroke="#221D17" stroke-width="2.5" stroke-linecap="round"/><ellipse cx="18" cy="40" rx="3" ry="2" fill="#FFC9D6"/><ellipse cx="46" cy="40" rx="3" ry="2" fill="#FFC9D6"/></svg>
 SAY & MORE
 </a>
@@ -276,7 +286,6 @@ SAY & MORE
   <button role="tab" id="tab-day" aria-controls="view-day" aria-selected="true" type="button">하루 기록</button>
   <button role="tab" id="tab-ing" aria-controls="view-ing" aria-selected="false" type="button" tabindex="-1">재료</button>
   <button role="tab" id="tab-stat" aria-controls="view-stat" aria-selected="false" type="button" tabindex="-1">한 주</button>
-  <span class="tab-ind" id="tabInd" aria-hidden="true"></span>
 </div>
 
 <!-- DAY -->
@@ -341,7 +350,7 @@ SAY & MORE
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
     끼니 기록하기</button></div>
 </nav>
-<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<div class="toast" id="toast" role="status" aria-live="polite"><span id="toastMsg"></span><button type="button" id="toastAct"></button></div>
 
 <!-- ENTRY -->
 <dialog id="entryDlg" aria-labelledby="entryTitle">
@@ -357,14 +366,14 @@ SAY & MORE
     </div>
     <div class="field" id="menuField">
       <label for="fMenu">메뉴</label>
-      <input type="text" id="fMenu" name="menu" placeholder="소고기 애호박죽" autocomplete="off" list="menuList" aria-describedby="menuErr">
+      <input type="text" id="fMenu" name="menu" placeholder="예: 소고기 애호박죽…" autocomplete="off" list="menuList" aria-describedby="menuErr">
       <datalist id="menuList"></datalist>
       <p class="err" id="menuErr" hidden>메뉴나 재료 중 하나는 적어주세요.</p>
     </div>
     <div class="field">
       <label for="fIng">들어간 재료</label>
       <div class="ing-input">
-        <input type="text" id="fIng" name="ingredient" placeholder="재료 이름" autocomplete="off" enterkeyhint="done" aria-describedby="ingHint">
+        <input type="text" id="fIng" name="ingredient" placeholder="예: 브로콜리…" autocomplete="off" enterkeyhint="done" aria-describedby="ingHint">
         <button class="btn btn--secondary" type="button" id="addIng">추가</button>
       </div>
       <p class="hint" id="ingHint">처음 먹는 재료에는 <b style="color:var(--new)">처음</b>, 알레르기 주의 재료에는 <b style="color:var(--allergen)">주의</b>가 붙어요.</p>
@@ -392,7 +401,7 @@ SAY & MORE
       <span class="lbl" id="reactLbl">먹은 뒤 반응 <small style="font-weight:500;color:var(--ink-soft)">있을 때만</small></span>
       <div class="choice danger" role="group" aria-labelledby="reactLbl" id="reactGroup"></div>
     </div>
-    <div class="field"><label for="fMemo">메모</label><textarea id="fMemo" name="memo" placeholder="농도, 컨디션, 변 상태"></textarea></div>
+    <div class="field"><label for="fMemo">메모</label><textarea id="fMemo" name="memo" placeholder="농도, 컨디션, 변 상태…"></textarea></div>
   </div>
   <div class="form-foot">
     <button class="btn btn--secondary" type="button" id="delEntry" hidden>삭제</button>
@@ -409,7 +418,7 @@ SAY & MORE
     <button class="x" type="button" data-close aria-label="닫기"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
   </div>
   <div class="form-body">
-    <div class="field"><label for="pName">이름 또는 태명</label><input type="text" id="pName" name="nickname" placeholder="콩이" autocomplete="off"></div>
+    <div class="field"><label for="pName">이름 또는 태명</label><input type="text" id="pName" name="nickname" placeholder="예: 콩이…" autocomplete="off"></div>
     <div class="field"><label for="pBirth">태어난 날</label><input type="date" id="pBirth" name="bday" autocomplete="bday"></div>
     <div class="field"><label for="pStart">이유식 시작한 날</label><input type="date" id="pStart" name="start"><p class="hint">비워두면 첫 기록 날짜로 셉니다.</p></div>
   </div>
@@ -421,192 +430,257 @@ SAY & MORE
 (function(){
 'use strict';
 var KEY='sayandmore.meal.v1';
+var SCHEMA=1;
 var ALLERGENS=['달걀','우유','밀','대두','땅콩','호두','잣','새우','게','고등어','오징어','조개','복숭아','토마토','메밀','돼지고기','소고기','닭고기'];
+var ALLERGEN_SET=new Set(ALLERGENS);
 var REACTIONS=['발진','두드러기','구토','설사','변비','입 주변 붉어짐','기침·쌕쌕거림'];
 var BASE_ING=['쌀','찹쌀','소고기','애호박','브로콜리','감자','고구마','당근','양배추','청경채','단호박','닭고기','두부','달걀노른자','오트밀','배','사과','바나나'];
 var LIKE={3:'잘 먹음',2:'보통',1:'거부'};
 var PRESETS=[30,50,80,100,120];
+var STATUS={test:'관찰 중',ok:'통과',bad:'반응 있음'};
+var ING_SPLIT=/[,\s]+/;
+var ESC_RE=/[&<>"']/g, ESC_MAP={'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'};
+var fmtLong=new Intl.DateTimeFormat('ko-KR',{month:'long',day:'numeric',weekday:'long'});
+var fmtShort=new Intl.DateTimeFormat('ko-KR',{month:'numeric',day:'numeric'});
+var fmtWd=new Intl.DateTimeFormat('ko-KR',{weekday:'short'});
+var fmtNum=new Intl.NumberFormat('ko-KR');
 
-function load(){try{var d=JSON.parse(localStorage.getItem(KEY));if(d&&Array.isArray(d.entries))return d;}catch(e){}return {profile:{},entries:[]};}
+/* ---------- storage (versioned) ---------- */
+function migrate(d){
+  if(!d||!Array.isArray(d.entries))return null;
+  return {v:SCHEMA,profile:d.profile||{},entries:d.entries.filter(function(e){return e&&e.id&&e.date&&e.time;})};
+}
+function load(){try{var d=migrate(JSON.parse(localStorage.getItem(KEY)));if(d)return d;}catch(e){}return {v:SCHEMA,profile:{},entries:[]};}
 var state=load();
-function save(){try{localStorage.setItem(KEY,JSON.stringify(state));}catch(e){toast('저장 공간을 쓸 수 없어요');}}
+var version=0;
+function commit(){version++;try{localStorage.setItem(KEY,JSON.stringify(state));}catch(e){toast('저장 공간이 부족해요. 백업 파일을 받은 뒤 오래된 기록을 지워주세요.');}}
 
+/* ---------- utils ---------- */
 var $=function(id){return document.getElementById(id);};
-function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+function esc(s){return String(s).replace(ESC_RE,function(c){return ESC_MAP[c];});}
 function pad(n){return (n<10?'0':'')+n;}
 function ymd(d){return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());}
 function parse(s){var p=s.split('-');return new Date(+p[0],p[1]-1,+p[2]);}
 function addDays(s,n){var d=parse(s);d.setDate(d.getDate()+n);return ymd(d);}
 function diffDays(a,b){return Math.round((parse(b)-parse(a))/864e5);}
-function md(s){var d=parse(s);return (d.getMonth()+1)+'/'+d.getDate();}
-function josa(w,a,b){var c=w.charCodeAt(w.length-1);if(c<0xAC00||c>0xD7A3)return w+a;return w+((c-0xAC00)%28?a:b);}
-var today=ymd(new Date()),cur=today;
-var WD=['일','월','화','수','목','금','토'];
-function toast(m){var t=$('toast');t.textContent=m;t.classList.add('show');clearTimeout(toast._t);toast._t=setTimeout(function(){t.classList.remove('show');},2200);}
-function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,7);}
 function byTime(a,b){return (a.date+a.time).localeCompare(b.date+b.time);}
+function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,7);}
+var DATE_RE=/^\d{4}-\d{2}-\d{2}$/;
+var today=ymd(new Date());
 
-/* derived */
-function ingredientIndex(){
-  var idx={};
-  state.entries.slice().sort(byTime).forEach(function(e){
-    (e.ings||[]).forEach(function(n){
-      var it=idx[n]||(idx[n]={name:n,first:e.date,days:{},count:0,reacts:{}});
-      it.count++;it.days[e.date]=1;
-    });
-    /* 반응은 그 끼니에서 가장 최근에 시작한 관찰 중 재료에 연결. 없으면 전부 */
-    var r=e.reacts||[];if(!r.length)return;
-    var sus=(e.ings||[]).filter(function(n){return diffDays(idx[n].first,e.date)<3;});
-    var latest=sus.reduce(function(a,n){return idx[n].first>a?idx[n].first:a;},'');
-    sus=sus.filter(function(n){return idx[n].first===latest;});
-    (sus.length?sus:(e.ings||[])).forEach(function(n){r.forEach(function(x){idx[n].reacts[x]=1;});});
+/* ---------- derived data: computed once per data version ---------- */
+var memo={v:-1};
+function derived(){
+  if(memo.v===version)return memo;
+  var sorted=state.entries.slice().sort(byTime);
+  var idx=new Map(), byDate=new Map(), used=new Map(), menus=new Set(), lastAmt=null;
+  for(var i=0;i<sorted.length;i++){
+    var e=sorted[i], ings=e.ings||[];
+    if(!byDate.has(e.date))byDate.set(e.date,[]);
+    byDate.get(e.date).push(e);
+    if(e.menu)menus.add(e.menu);
+    lastAmt=e.amount;
+    for(var j=0;j<ings.length;j++){
+      var n=ings[j], it=idx.get(n);
+      if(!it){it={name:n,first:e.date,firstId:e.id,days:new Set(),count:0,reacts:new Set()};idx.set(n,it);}
+      it.count++;it.days.add(e.date);
+      used.set(n,(used.get(n)||0)+1);
+    }
+    var r=e.reacts||[];
+    if(r.length&&ings.length){
+      /* 반응은 그 끼니에서 가장 최근에 시작한 관찰 중 재료에 연결. 없으면 전부 */
+      var latest='',sus=[];
+      for(j=0;j<ings.length;j++){var f=idx.get(ings[j]).first;if(diffDays(f,e.date)<3){if(f>latest){latest=f;sus=[ings[j]];}else if(f===latest)sus.push(ings[j]);}}
+      (sus.length?sus:ings).forEach(function(n){var it=idx.get(n);r.forEach(function(x){it.reacts.add(x);});});
+    }
+  }
+  var cnt={all:0,test:0,ok:0,bad:0};
+  idx.forEach(function(it){
+    var streak=0;while(streak<3&&it.days.has(addDays(it.first,streak)))streak++;
+    it.testDays=streak;it.bad=it.reacts.size>0;
+    it.status=it.bad?'bad':(streak>=3||it.days.size>=3?'ok':'test');
+    cnt.all++;cnt[it.status]++;
   });
-  Object.keys(idx).forEach(function(n){
-    var it=idx[n],streak=0;
-    for(var i=0;i<3;i++){if(it.days[addDays(it.first,i)])streak++;else break;}
-    it.testDays=streak;it.bad=Object.keys(it.reacts).length>0;
-    it.status=it.bad?'bad':(streak>=3||Object.keys(it.days).length>=3?'ok':'test');
-  });
-  return idx;
+  var first=sorted.length?sorted[0].date:null;
+  memo={v:version,idx:idx,byDate:byDate,used:used,menus:menus,lastAmt:lastAmt,cnt:cnt,first:first};
+  return memo;
 }
-function firstSeenBefore(name,date,exceptId){return state.entries.some(function(o){return o.id!==exceptId&&o.date<date&&(o.ings||[]).indexOf(name)>-1;});}
-function isNewIn(name,e){return !firstSeenBefore(name,e.date,e.id)&&!state.entries.some(function(o){return o.id!==e.id&&o.date===e.date&&o.time<e.time&&(o.ings||[]).indexOf(name)>-1;});}
-var STATUS={test:'관찰 중',ok:'통과',bad:'반응 있음'};
+function isNewIn(name,e){var it=derived().idx.get(name);return !!it&&it.firstId===e.id;}
+function dayTotal(list){var s=0;for(var i=0;i<list.length;i++)s+=(+list[i].amount||0);return s;}
 
-/* profile */
+/* ---------- URL state ---------- */
+var tabs=['day','ing','stat'];
+var url=new URLSearchParams(location.search);
+var curTab=tabs.indexOf(url.get('tab'))>-1?url.get('tab'):'day';
+var cur=(DATE_RE.test(url.get('date')||'')&&url.get('date')<=today)?url.get('date'):today;
+var ingFilter=['all','test','ok','bad'].indexOf(url.get('f'))>-1?url.get('f'):'all';
+function syncUrl(){
+  var q=new URLSearchParams();
+  if(curTab!=='day')q.set('tab',curTab);
+  if(curTab==='day'&&cur!==today)q.set('date',cur);
+  if(curTab==='ing'&&ingFilter!=='all')q.set('f',ingFilter);
+  var s=q.toString();
+  try{history.replaceState(null,'',location.pathname+(s?'?'+s:''));}catch(e){}
+}
+
+/* ---------- toast with optional action ---------- */
+var toastT;
+function toast(msg,actLabel,act){
+  var t=$('toast');$('toastMsg').textContent=msg;
+  var b=$('toastAct');b.textContent=actLabel||'';b.onclick=act?function(){act();t.classList.remove('show');}:null;
+  t.classList.add('show');clearTimeout(toastT);toastT=setTimeout(function(){t.classList.remove('show');b.onclick=null;},act?6000:2400);
+}
+
+/* ---------- profile ---------- */
 function months(b,on){var x=parse(b),d=parse(on);var m=(d.getFullYear()-x.getFullYear())*12+d.getMonth()-x.getMonth();if(d.getDate()<x.getDate())m--;return m;}
 function stageOf(m){if(m<4)return '이유식 전';if(m<7)return '초기';if(m<9)return '중기';if(m<12)return '후기';return '완료기';}
 function renderProfile(){
   var p=state.profile;$('babyName').textContent=p.name||'우리 아기';
   var parts=[];
-  if(p.birth){var m=months(p.birth,today);parts.push('<span><b class="num">'+m+'개월</b> ('+(diffDays(p.birth,today)+1)+'일째)</span><span>'+stageOf(m)+' 이유식</span>');}
-  var start=p.start||(state.entries.length?state.entries.reduce(function(a,e){return e.date<a?e.date:a;},'9999'):null);
+  if(p.birth){var m=months(p.birth,today);parts.push('<span><b class="num">'+m+'개월</b> ('+fmtNum.format(diffDays(p.birth,today)+1)+'일째)</span><span>'+stageOf(m)+' 이유식</span>');}
+  var start=p.start||derived().first;
   if(start&&start<=today)parts.push('<span>이유식 <b class="num">'+(diffDays(start,today)+1)+'일째</b></span>');
-  parts.push('<button class="link" id="profileBtn" type="button">'+(p.birth?'아기 정보 고치기':'생일 넣고 개월 수 보기')+'</button>');
+  parts.push('<button class="link" data-act="profile" type="button">'+(p.birth?'아기 정보 고치기':'생일 넣고 개월 수 보기')+'</button>');
   $('babyLine').innerHTML=parts.join('');
-  $('profileBtn').addEventListener('click',openProfile);
 }
+$('babyLine').addEventListener('click',function(e){if(e.target.closest('[data-act="profile"]'))openProfile();});
 
-/* day */
+/* ---------- day ---------- */
 function renderDay(){
-  var d=parse(cur);
-  $('dateLabel').textContent=(d.getMonth()+1)+'월 '+d.getDate()+'일 '+WD[d.getDay()]+'요일';
-  var gap=diffDays(cur,today);
+  var d=parse(cur), gap=diffDays(cur,today);
+  $('dateLabel').textContent=fmtLong.format(d);
   $('dateSub').textContent=gap===0?'오늘':gap===1?'어제':gap+'일 전';
   $('nextDay').disabled=cur>=today;
-  var list=state.entries.filter(function(e){return e.date===cur;}).sort(byTime);
-  var news=[];list.forEach(function(e){(e.ings||[]).forEach(function(n){if(isNewIn(n,e)&&news.indexOf(n)<0)news.push(n);});});
-  var total=list.reduce(function(s,e){return s+(+e.amount||0);},0);
+  var list=derived().byDate.get(cur)||[];
+  var news=[];
+  list.forEach(function(e){(e.ings||[]).forEach(function(n){if(isNewIn(n,e))news.push(n);});});
   var when=gap===0?'오늘은':gap===1?'어제는':'이날은';
   $('daySum').innerHTML=list.length
-    ? when+' <b class="num">'+list.length+'번</b>, 모두 <b class="num">'+total+'ml</b> 먹었어요.'+(news.length?' 처음 먹은 재료는 <b>'+esc(news.join(', '))+'</b>.':'')
+    ? when+' <b class="num">'+list.length+'번</b>, 모두 <b class="num">'+fmtNum.format(dayTotal(list))+'ml</b> 먹었어요.'+(news.length?' 처음 먹은 재료는 <b>'+esc(news.join(', '))+'</b>.':'')
     : when+' 아직 기록이 없어요.';
   var tl=$('timeline');
   if(!list.length){tl.innerHTML='<li class="empty" style="display:block"><strong>빈 페이지</strong>아래 버튼으로 첫 끼니를 적어보세요.</li>';return;}
   tl.innerHTML=list.map(function(e){
     var tags=(e.ings||[]).map(function(n){
       if(isNewIn(n,e))return '<span class="tag new">'+esc(n)+'<span class="k">처음</span></span>';
-      if(ALLERGENS.indexOf(n)>-1)return '<span class="tag allergen">'+esc(n)+'<span class="k">주의</span></span>';
+      if(ALLERGEN_SET.has(n))return '<span class="tag allergen">'+esc(n)+'<span class="k">주의</span></span>';
       return '<span class="tag">'+esc(n)+'</span>';
     }).join('');
-    var r=(e.reacts||[]);
-    return '<li'+(r.length?' class="has-react"':'')+'><time class="num">'+esc(e.time)+'</time><div>'+
+    var r=e.reacts||[];
+    return '<li'+(r.length?' class="has-react"':'')+'><time class="num" datetime="'+e.date+'T'+esc(e.time)+'">'+esc(e.time)+'</time><div>'+
       '<div class="menu">'+esc(e.menu||(e.ings||[]).join(' ')||'메뉴 없음')+'</div>'+
-      '<div class="meta"><span class="num">'+(+e.amount||0)+'ml</span> · '+LIKE[e.like||2]+(e.memo?' · '+esc(e.memo):'')+'</div>'+
+      '<div class="meta"><span class="num">'+fmtNum.format(+e.amount||0)+'ml</span> · '+LIKE[e.like||2]+(e.memo?' · '+esc(e.memo):'')+'</div>'+
       (tags?'<div class="tags">'+tags+'</div>':'')+
       (r.length?'<div class="react">반응: '+esc(r.join(', '))+'</div>':'')+
-      '</div><button class="link edit" type="button" data-edit="'+e.id+'" aria-label="'+esc(e.time)+' 기록 고치기">고치기</button></li>';
+      '</div><button class="link edit" type="button" data-edit="'+esc(e.id)+'" aria-label="'+esc(e.time)+' 기록 고치기">고치기</button></li>';
   }).join('');
 }
 
-/* ingredients */
-var ingFilter='all';
+/* ---------- ingredients ---------- */
+var FILTER_LABEL={all:'전체',test:'관찰 중',ok:'통과',bad:'반응 있음'};
+var ORDER={bad:0,test:1,ok:2};
 function renderIng(){
-  var idx=ingredientIndex(),all=Object.keys(idx).map(function(k){return idx[k];});
-  var cnt={all:all.length,test:0,ok:0,bad:0};all.forEach(function(i){cnt[i.status]++;});
-  var labels={all:'전체',test:'관찰 중',ok:'통과',bad:'반응 있음'};
-  $('ingFilter').innerHTML=Object.keys(labels).map(function(k){
-    return '<input type="radio" name="f" id="f-'+k+'" value="'+k+'"'+(ingFilter===k?' checked':'')+'><label for="f-'+k+'">'+labels[k]+' <small class="num">'+cnt[k]+'</small></label>';
+  var D=derived(), all=Array.from(D.idx.values());
+  $('ingFilter').innerHTML=Object.keys(FILTER_LABEL).map(function(k){
+    return '<input type="radio" name="f" id="f-'+k+'" value="'+k+'"'+(ingFilter===k?' checked':'')+'><label for="f-'+k+'">'+FILTER_LABEL[k]+' <small class="num">'+D.cnt[k]+'</small></label>';
   }).join('');
   var items=all.filter(function(i){return ingFilter==='all'||i.status===ingFilter;})
-    .sort(function(a,b){var o={bad:0,test:1,ok:2};return o[a.status]-o[b.status]||b.first.localeCompare(a.first);});
+    .sort(function(a,b){return ORDER[a.status]-ORDER[b.status]||b.first.localeCompare(a.first);});
   $('ingList').innerHTML=items.length?items.map(function(i){
     var bars='';for(var k=0;k<3;k++)bars+='<i class="'+(k<i.testDays?'on':'')+'"></i>';
-    var sub='처음 '+md(i.first)+' · '+i.count+'번 먹음';
+    var reacts=Array.from(i.reacts).join(', ');
     return '<li><span class="nm">'+esc(i.name)+'</span>'+
       '<span class="days" role="img" aria-label="사흘 중 '+i.testDays+'일 먹음">'+bars+'</span>'+
       '<span class="st '+i.status+'">'+STATUS[i.status]+'</span>'+
-      '<span class="sub'+(i.bad?' bad':'')+'">'+(i.bad?'반응: '+esc(Object.keys(i.reacts).join(', '))+' · ':'')+sub+'</span></li>';
+      '<span class="sub'+(i.bad?' bad':'')+'">'+(i.bad?'반응: '+esc(reacts)+' · ':'')+'처음 '+fmtShort.format(parse(i.first))+' · '+i.count+'번 먹음</span></li>';
   }).join(''):'<li class="empty" style="display:block">'+(all.length?'이 상태의 재료가 없어요.':'기록을 남기면 재료가 여기에 쌓여요.')+'</li>';
   $('allergenGrid').innerHTML=ALLERGENS.map(function(a){
-    var it=idx[a];var s=it?it.status:'none';
+    var it=D.idx.get(a), s=it?it.status:'none';
     return '<li><span>'+esc(a)+'</span><span class="st '+s+'">'+(it?STATUS[s]:'아직')+'</span></li>';
   }).join('');
 }
-$('ingFilter').addEventListener('change',function(e){ingFilter=e.target.value;renderIng();var el=$('f-'+ingFilter);if(el)el.focus();});
+$('ingFilter').addEventListener('change',function(e){ingFilter=e.target.value;syncUrl();renderIng();var el=$('f-'+ingFilter);if(el)el.focus();});
 
-/* week */
+/* ---------- week ---------- */
 function renderStat(){
-  var days=[],max=1;
-  for(var i=6;i>=0;i--){var d=addDays(today,-i);var s=state.entries.filter(function(e){return e.date===d;}).reduce(function(a,e){return a+(+e.amount||0);},0);days.push({d:d,s:s});if(s>max)max=s;}
-  $('bars').innerHTML=days.map(function(x){return '<div class="b'+(x.d===today?' today':'')+'"><span class="num">'+(x.s||'')+'</span><i style="height:'+Math.round(x.s/max*120)+'px"></i></div>';}).join('');
-  $('xaxis').innerHTML=days.map(function(x){return '<span'+(x.d===today?' class="today"':'')+'>'+(x.d===today?'오늘':WD[parse(x.d).getDay()])+'</span>';}).join('');
-  var sum=days.reduce(function(a,x){return a+x.s;},0),fed=days.filter(function(x){return x.s;}).length;
-  $('bars').setAttribute('aria-label','최근 7일 먹은 양: '+days.map(function(x){return WD[parse(x.d).getDay()]+' '+x.s+'ml';}).join(', '));
-  $('weekLead').textContent=fed?'7일 중 '+fed+'일 기록했고, 기록한 날은 하루 평균 '+Math.round(sum/fed)+'ml 먹었어요.':'이번 주 기록이 아직 없어요.';
-  var idx=ingredientIndex(),keys=Object.keys(idx);
-  $('kTotal').textContent=state.entries.length+'끼';
-  $('kIng').textContent=keys.length+'가지';
-  $('kBad').textContent=keys.filter(function(k){return idx[k].bad;}).length+'가지';
+  var D=derived(), days=[], max=1, sum=0, fed=0;
+  for(var i=6;i>=0;i--){
+    var d=addDays(today,-i), s=dayTotal(D.byDate.get(d)||[]);
+    days.push({d:d,s:s});if(s>max)max=s;sum+=s;if(s)fed++;
+  }
+  $('bars').innerHTML=days.map(function(x){return '<div class="b'+(x.d===today?' today':'')+'"><span class="num">'+(x.s?fmtNum.format(x.s):'')+'</span><i style="height:'+Math.round(x.s/max*120)+'px"></i></div>';}).join('');
+  $('xaxis').innerHTML=days.map(function(x){return '<span'+(x.d===today?' class="today"':'')+'>'+(x.d===today?'오늘':fmtWd.format(parse(x.d)))+'</span>';}).join('');
+  $('bars').setAttribute('aria-label','최근 7일 먹은 양: '+days.map(function(x){return fmtWd.format(parse(x.d))+' '+x.s+'ml';}).join(', '));
+  $('weekLead').textContent=fed?'7일 중 '+fed+'일 기록했고, 기록한 날은 하루 평균 '+fmtNum.format(Math.round(sum/fed))+'ml 먹었어요.':'이번 주 기록이 아직 없어요.';
+  $('kTotal').textContent=fmtNum.format(state.entries.length)+'끼';
+  $('kIng').textContent=D.cnt.all+'가지';
+  $('kBad').textContent=D.cnt.bad+'가지';
 }
-function renderAll(){renderProfile();renderDay();if(!$('view-ing').hidden)renderIng();if(!$('view-stat').hidden)renderStat();}
 
-/* tabs */
-var tabs=['day','ing','stat'];
-function moveInd(){var a=document.querySelector('.tabs [aria-selected="true"]');var ind=$('tabInd');ind.style.width=a.offsetWidth+'px';ind.style.transform='translateX('+a.offsetLeft+'px)';}
+function renderAll(){renderProfile();if(curTab==='day')renderDay();else if(curTab==='ing')renderIng();else renderStat();}
+
+/* ---------- tabs ---------- */
 function showTab(t){
+  curTab=t;
   tabs.forEach(function(x){var on=x===t,b=$('tab-'+x);b.setAttribute('aria-selected',on);b.tabIndex=on?0:-1;$('view-'+x).hidden=!on;});
-  if(t==='ing')renderIng();if(t==='stat')renderStat();moveInd();
-  try{sessionStorage.setItem(KEY+'.tab',t);}catch(e){}
+  syncUrl();renderAll();
 }
-tabs.forEach(function(t){$('tab-'+t).addEventListener('click',function(){showTab(t);});});
+tabs.forEach(function(t){$('tab-'+t).addEventListener('click',function(){if(curTab!==t)showTab(t);});});
 document.querySelector('.tabs').addEventListener('keydown',function(e){
-  if(e.key!=='ArrowRight'&&e.key!=='ArrowLeft')return;
-  var i=tabs.indexOf(document.activeElement.id.replace('tab-',''));if(i<0)return;
-  var n=tabs[(i+(e.key==='ArrowRight'?1:2))%3];showTab(n);$('tab-'+n).focus();
+  var i=tabs.indexOf(curTab),n;
+  if(e.key==='ArrowRight')n=tabs[(i+1)%3];else if(e.key==='ArrowLeft')n=tabs[(i+2)%3];
+  else if(e.key==='Home')n=tabs[0];else if(e.key==='End')n=tabs[2];else return;
+  e.preventDefault();showTab(n);$('tab-'+n).focus();
 });
-window.addEventListener('resize',moveInd);
-if(document.fonts&&document.fonts.ready)document.fonts.ready.then(moveInd);
 
-$('prevDay').addEventListener('click',function(){cur=addDays(cur,-1);renderDay();});
-$('nextDay').addEventListener('click',function(){if(cur<today){cur=addDays(cur,1);renderDay();}});
+function goDay(n){var d=addDays(cur,n);if(d>today)return;cur=d;syncUrl();renderDay();}
+$('prevDay').addEventListener('click',function(){goDay(-1);});
+$('nextDay').addEventListener('click',function(){goDay(1);});
 
-/* dialogs */
+/* ---------- dialogs (guard unsaved input) ---------- */
+var snapshot='';
+function formState(){return [$('fDate').value,$('fTime').value,$('fMenu').value,$('fIng').value,picked.join('|'),$('fAmount').value,$('fMemo').value,
+  (document.querySelector('input[name=like]:checked')||{}).value,
+  Array.prototype.map.call(document.querySelectorAll('#reactGroup input:checked'),function(c){return c.value;}).join('|')].join('\u0001');}
+function isDirty(d){return d.id==='entryDlg'&&formState()!==snapshot;}
+function tryClose(d){if(isDirty(d)&&!confirm('적던 내용이 사라져요. 닫을까요?'))return;d.close();}
 function openDlg(d){if(d.showModal)d.showModal();else d.setAttribute('open','');}
-document.querySelectorAll('[data-close]').forEach(function(b){b.addEventListener('click',function(){b.closest('dialog').close();});});
-document.querySelectorAll('dialog').forEach(function(d){d.addEventListener('click',function(e){if(e.target===d)d.close();});});
+document.querySelectorAll('[data-close]').forEach(function(b){b.addEventListener('click',function(){tryClose(b.closest('dialog'));});});
+document.querySelectorAll('dialog').forEach(function(d){
+  d.addEventListener('click',function(e){if(e.target===d)tryClose(d);});
+  d.addEventListener('cancel',function(e){if(isDirty(d)){e.preventDefault();tryClose(d);}});
+});
 
-/* entry form */
+/* ---------- entry form ---------- */
 var editing=null,picked=[];
 $('reactGroup').innerHTML=REACTIONS.map(function(r,i){return '<input type="checkbox" id="r'+i+'" value="'+esc(r)+'"><label for="r'+i+'">'+esc(r)+'</label>';}).join('');
-$('presets').innerHTML=PRESETS.map(function(v){return '<button type="button" data-set="'+v+'" class="num">'+v+'</button>';}).join('');
+$('presets').innerHTML=PRESETS.map(function(v){return '<button type="button" data-set="'+v+'" class="num" aria-label="'+v+'ml로 맞추기">'+v+'</button>';}).join('');
 $('presets').addEventListener('click',function(e){var b=e.target.closest('[data-set]');if(b)$('fAmount').value=b.dataset.set;});
 
+function seenBefore(name,date,exceptId){
+  var it=derived().idx.get(name);
+  if(!it||it.first>=date)return false;
+  return state.entries.some(function(o){return o.id!==exceptId&&o.date<date&&(o.ings||[]).indexOf(name)>-1;});
+}
 function renderPicked(){
-  var idx=ingredientIndex(),date=$('fDate').value,eid=editing&&editing.id;
+  var D=derived(), date=$('fDate').value, eid=editing&&editing.id;
   $('picked').innerHTML=picked.map(function(n,i){
-    var isNew=!firstSeenBefore(n,date,eid);
-    var cls=isNew?' new':(ALLERGENS.indexOf(n)>-1?' allergen':'');
-    var k=isNew?'<span class="k">처음</span>':(ALLERGENS.indexOf(n)>-1?'<span class="k">주의</span>':'');
+    var isNew=!seenBefore(n,date,eid), al=ALLERGEN_SET.has(n);
+    var cls=isNew?' new':(al?' allergen':'');
+    var k=isNew?'<span class="k">처음</span>':(al?'<span class="k">주의</span>':'');
     return '<span class="tag'+cls+'">'+esc(n)+k+'<button type="button" data-rm="'+i+'" aria-label="'+esc(n)+' 빼기"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></span>';
   }).join('');
-  var used={};state.entries.forEach(function(e){(e.ings||[]).forEach(function(n){used[n]=(used[n]||0)+1;});});
-  var pool=Object.keys(used).sort(function(a,b){return used[b]-used[a];}).concat(BASE_ING);
-  var seen={},sug=[];pool.forEach(function(n){if(!seen[n]&&picked.indexOf(n)<0&&sug.length<10){seen[n]=1;sug.push(n);}});
+  var pool=Array.from(D.used.keys()).sort(function(a,b){return D.used.get(b)-D.used.get(a);}).concat(BASE_ING);
+  var seen=new Set(picked), sug=[];
+  for(var i=0;i<pool.length&&sug.length<10;i++){if(!seen.has(pool[i])){seen.add(pool[i]);sug.push(pool[i]);}}
   $('suggest').innerHTML=sug.map(function(n){return '<button type="button" data-sg="'+esc(n)+'">'+esc(n)+'</button>';}).join('');
 }
 function clearErr(){$('menuField').classList.remove('invalid');$('menuErr').hidden=true;$('fMenu').removeAttribute('aria-invalid');}
-function addIngredient(v){v=(v||'').trim();if(!v)return;v.split(/[,\s]+/).forEach(function(n){if(n&&picked.indexOf(n)<0)picked.push(n);});clearErr();renderPicked();}
+function addIngredient(v){
+  v=(v||'').trim();if(!v)return;
+  v.split(ING_SPLIT).forEach(function(n){n=n.slice(0,30);if(n&&picked.indexOf(n)<0)picked.push(n);});
+  clearErr();renderPicked();
+}
 $('addIng').addEventListener('click',function(){addIngredient($('fIng').value);$('fIng').value='';$('fIng').focus();});
 $('fIng').addEventListener('keydown',function(e){if(e.key==='Enter'&&!e.isComposing){e.preventDefault();addIngredient(this.value);this.value='';}});
 $('fMenu').addEventListener('input',clearErr);
@@ -614,7 +688,6 @@ $('picked').addEventListener('click',function(e){var b=e.target.closest('[data-r
 $('suggest').addEventListener('click',function(e){var b=e.target.closest('[data-sg]');if(b)addIngredient(b.dataset.sg);});
 document.querySelectorAll('[data-amt]').forEach(function(b){b.addEventListener('click',function(){var i=$('fAmount');i.value=Math.max(0,(+i.value||0)+(+b.dataset.amt));});});
 
-function lastAmount(){var l=state.entries.slice().sort(byTime).pop();return l&&l.amount;}
 function openEntry(e){
   editing=e||null;clearErr();
   var now=new Date();
@@ -622,15 +695,15 @@ function openEntry(e){
   $('fDate').value=e?e.date:cur;$('fDate').max=today;
   $('fTime').value=e?e.time:pad(now.getHours())+':'+pad(now.getMinutes());
   $('fMenu').value=e?e.menu||'':'';
-  $('fAmount').value=e?e.amount:(lastAmount()||50);
+  $('fIng').value='';
+  $('fAmount').value=e?e.amount:(derived().lastAmt||50);
   $('fMemo').value=e?e.memo||'':'';
   document.querySelector('input[name=like][value="'+(e?e.like||2:2)+'"]').checked=true;
   document.querySelectorAll('#reactGroup input').forEach(function(c){c.checked=!!(e&&(e.reacts||[]).indexOf(c.value)>-1);});
   picked=e?(e.ings||[]).slice():[];
   $('delEntry').hidden=!e;
-  var menus={};state.entries.forEach(function(x){if(x.menu)menus[x.menu]=1;});
-  $('menuList').innerHTML=Object.keys(menus).slice(-30).map(function(m){return '<option value="'+esc(m)+'">';}).join('');
-  renderPicked();openDlg($('entryDlg'));
+  $('menuList').innerHTML=Array.from(derived().menus).slice(-30).map(function(m){return '<option value="'+esc(m)+'">';}).join('');
+  renderPicked();snapshot=formState();openDlg($('entryDlg'));
 }
 $('addBtn').addEventListener('click',function(){openEntry(null);});
 $('timeline').addEventListener('click',function(ev){var b=ev.target.closest('[data-edit]');if(!b)return;var e=state.entries.find(function(x){return x.id===b.dataset.edit;});if(e)openEntry(e);});
@@ -642,29 +715,31 @@ $('entryForm').addEventListener('submit',function(ev){
   if(!$('fMenu').value.trim()&&!picked.length){
     $('menuField').classList.add('invalid');$('menuErr').hidden=false;$('fMenu').setAttribute('aria-invalid','true');$('fMenu').focus();return;
   }
-  if(!$('fDate').value)$('fDate').value=cur;
-  if(!$('fTime').value)$('fTime').value='12:00';
+  var date=DATE_RE.test($('fDate').value)&&$('fDate').value<=today?$('fDate').value:cur;
   var data={
-    id:editing?editing.id:uid(),date:$('fDate').value,time:$('fTime').value,menu:$('fMenu').value.trim(),
-    ings:picked.slice(),amount:Math.max(0,+$('fAmount').value||0),
+    id:editing?editing.id:uid(),date:date,time:$('fTime').value||'12:00',menu:$('fMenu').value.trim().slice(0,60),
+    ings:picked.slice(),amount:Math.min(1000,Math.max(0,+$('fAmount').value||0)),
     like:+document.querySelector('input[name=like]:checked').value,
     reacts:Array.prototype.map.call(document.querySelectorAll('#reactGroup input:checked'),function(c){return c.value;}),
-    memo:$('fMemo').value.trim()
+    memo:$('fMemo').value.trim().slice(0,300)
   };
   if(editing)state.entries[state.entries.indexOf(editing)]=data;else state.entries.push(data);
-  save();cur=data.date;$('entryDlg').close();renderAll();
+  commit();cur=data.date;$('entryDlg').close();
+  if(curTab!=='day')showTab('day');else{syncUrl();renderAll();}
   toast(data.reacts.length?'저장했어요. 반응이 이어지면 소아과에 물어보세요.':data.time+' 끼니를 저장했어요');
 });
 $('delEntry').addEventListener('click',function(){
-  if(!editing||!confirm(editing.time+' 기록을 지울까요?'))return;
-  state.entries.splice(state.entries.indexOf(editing),1);save();$('entryDlg').close();renderAll();toast('기록을 지웠어요');
+  if(!editing)return;
+  var removed=editing, at=state.entries.indexOf(removed);
+  state.entries.splice(at,1);commit();$('entryDlg').close();renderAll();
+  toast(removed.time+' 기록을 지웠어요','되돌리기',function(){state.entries.splice(at,0,removed);commit();renderAll();toast('되돌렸어요');});
 });
 
-/* profile */
+/* ---------- profile ---------- */
 function openProfile(){var p=state.profile;$('pName').value=p.name||'';$('pBirth').value=p.birth||'';$('pStart').value=p.start||'';$('pBirth').max=today;openDlg($('profileDlg'));}
-$('profileForm').addEventListener('submit',function(ev){ev.preventDefault();state.profile={name:$('pName').value.trim(),birth:$('pBirth').value,start:$('pStart').value};save();$('profileDlg').close();renderProfile();toast('아기 정보를 저장했어요');});
+$('profileForm').addEventListener('submit',function(ev){ev.preventDefault();state.profile={name:$('pName').value.trim().slice(0,20),birth:$('pBirth').value,start:$('pStart').value};commit();$('profileDlg').close();renderAll();toast('아기 정보를 저장했어요');});
 
-/* export / import */
+/* ---------- export / import ---------- */
 function download(name,text,type){var a=document.createElement('a');a.href=URL.createObjectURL(new Blob([text],{type:type}));a.download=name;document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(a.href);a.remove();},0);}
 $('exportCsv').addEventListener('click',function(){
   var q=function(s){return '"'+String(s==null?'':s).replace(/"/g,'""')+'"';};
@@ -675,14 +750,19 @@ $('exportCsv').addEventListener('click',function(){
 $('exportJson').addEventListener('click',function(){download('이유식백업_'+today+'.json',JSON.stringify(state,null,1),'application/json');});
 $('importJson').addEventListener('change',function(){
   var f=this.files[0];if(!f)return;var r=new FileReader();
-  r.onload=function(){try{var d=JSON.parse(r.result);if(!d||!Array.isArray(d.entries))throw 0;
-    if(!confirm('지금 기록을 백업 파일의 '+d.entries.length+'끼로 바꿀까요?'))return;
-    state={profile:d.profile||{},entries:d.entries};save();renderAll();toast('백업을 불러왔어요');}catch(e){toast('백업 파일을 읽지 못했어요');}};
+  r.onload=function(){
+    var d;try{d=migrate(JSON.parse(r.result));}catch(e){}
+    if(!d){toast('백업 파일을 읽지 못했어요. 이 페이지에서 받은 .json 파일인지 확인해주세요.');return;}
+    var prev=state;state=d;commit();renderAll();
+    toast(d.entries.length+'끼 기록을 불러왔어요','되돌리기',function(){state=prev;commit();renderAll();toast('이전 기록으로 돌아갔어요');});
+  };
   r.readAsText(f);this.value='';
 });
 
-renderAll();
-try{var t=sessionStorage.getItem(KEY+'.tab');if(t&&tabs.indexOf(t)>-1)showTab(t);else moveInd();}catch(e){moveInd();}
+/* other tab changed the data */
+window.addEventListener('storage',function(e){if(e.key===KEY){state=load();version++;renderAll();}});
+
+showTab(curTab);
 })();
 </script>
 </body>
